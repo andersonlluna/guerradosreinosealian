@@ -26,9 +26,9 @@
             --text-bright: #EDE8E0;
             --text-muted: #6B6878;
             /* Alianças */
-            --bastardos: #8B2A2A;
-            --bastardos-light: #C94040;
-            --bastardos-glow: rgba(139,42,42,0.35);
+            --bastardos: #5A6470;
+            --bastardos-light: #B0BEC5;
+            --bastardos-glow: rgba(90,100,112,0.35);
             --anel: #1C4E3A;
             --anel-light: #2E7A58;
             --anel-glow: rgba(28,78,58,0.35);
@@ -38,7 +38,7 @@
             font-family: 'Crimson Text', Georgia, serif;
             background: var(--bg-deep);
             background-image:
-                radial-gradient(ellipse at 20% 10%, rgba(139,42,42,0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 20% 10%, rgba(90,100,112,0.08) 0%, transparent 50%),
                 radial-gradient(ellipse at 80% 90%, rgba(28,78,58,0.08) 0%, transparent 50%),
                 radial-gradient(ellipse at 50% 50%, rgba(200,134,10,0.04) 0%, transparent 65%),
                 linear-gradient(180deg, #080A0E 0%, #0A0D14 100%);
@@ -89,7 +89,7 @@
             padding:3px 10px; border-radius:3px;
             letter-spacing:0.04em; font-weight:700;
         }
-        .badge-bastardos { background:rgba(139,42,42,0.2); border:1px solid rgba(201,64,64,0.5); color:#C94040; }
+        .badge-bastardos { background:rgba(90,100,112,0.2); border:1px solid rgba(176,190,197,0.4); color:#B0BEC5; }
         .badge-anel      { background:rgba(28,78,58,0.2);  border:1px solid rgba(46,122,88,0.5);  color:#2E7A58; }
         .header-sub {
             font-family:'Crimson Text',serif; font-size:0.85em; color:var(--text-muted);
@@ -151,7 +151,7 @@
             padding:2px 8px; border-radius:3px; margin-top:3px;
             font-weight:700; letter-spacing:0.03em;
         }
-        .tag-bastardos { background:rgba(139,42,42,0.18); border:1px solid rgba(201,64,64,0.4); color:#C05050; }
+        .tag-bastardos { background:rgba(90,100,112,0.18); border:1px solid rgba(176,190,197,0.35); color:#9AAAB8; }
         .tag-anel      { background:rgba(28,78,58,0.18);  border:1px solid rgba(46,122,88,0.4);  color:#3A8A66; }
 
         .crown-icon { position:absolute; top:10px; right:10px; font-size:1.8em; opacity:0.9; }
@@ -224,8 +224,8 @@
             padding:14px 16px; border-radius:5px; margin-bottom:10px;
         }
         .alliance-header-card.bastardos {
-            background:linear-gradient(135deg,rgba(139,42,42,0.15),rgba(139,42,42,0.04));
-            border:1px solid rgba(201,64,64,0.35);
+            background:linear-gradient(135deg,rgba(90,100,112,0.15),rgba(90,100,112,0.04));
+            border:1px solid rgba(176,190,197,0.3);
         }
         .alliance-header-card.anel {
             background:linear-gradient(135deg,rgba(28,78,58,0.15),rgba(28,78,58,0.04));
@@ -234,7 +234,7 @@
         .alliance-icon { font-size:2.6em; flex-shrink:0; }
         .alliance-info { flex:1; }
         .alliance-name { font-family:'Cinzel',serif; font-size:1.12em; font-weight:900; letter-spacing:0.04em; }
-        .alliance-name.bastardos { color:#A04040; }
+        .alliance-name.bastardos { color:#9AAAB8; }
         .alliance-name.anel      { color:#3A8060; }
         .alliance-subtitle { font-size:0.82em; color:var(--text-muted); font-style:italic; margin-top:2px; }
         .alliance-total { font-family:'Cinzel',serif; font-size:1.9em; font-weight:900; text-align:right; }
@@ -245,7 +245,7 @@
             display:flex; align-items:center; gap:10px;
             padding:11px 13px; border-radius:5px; margin-bottom:7px; border:1px solid;
         }
-        .member-row.bastardos { border-color:rgba(139,42,42,0.3); background:rgba(139,42,42,0.04); }
+        .member-row.bastardos { border-color:rgba(90,100,112,0.3); background:rgba(90,100,112,0.04); }
         .member-row.anel      { border-color:rgba(28,78,58,0.3);  background:rgba(28,78,58,0.04); }
         .member-avatar { font-size:1.9em; flex-shrink:0; }
         .member-info { flex:1; }
@@ -324,7 +324,7 @@
             border-radius:4px; padding:11px 13px; font-size:0.92em; color:#6A6050;
             margin-bottom:10px; font-style:italic; line-height:1.5;
         }
-        .rule-note.warning { background:rgba(139,42,42,0.08); border-color:rgba(139,42,42,0.25); color:#7A4040; }
+        .rule-note.warning { background:rgba(90,100,112,0.08); border-color:rgba(139,42,42,0.25); color:#7A4040; }
 
         /* NAV */
         .bottom-nav {
@@ -362,7 +362,7 @@
 <body>
 
 <div class="loading-screen" id="loading">
-    <div class="loading-icon">⚔️</div>
+    <div class="loading-icon">🗡️</div>
     <div class="loading-text">Carregando os Reinos...</div>
 </div>
 
@@ -375,7 +375,7 @@
 <div class="header">
     <div class="header-title">⚔️ Guerra dos Reinos e Alianças ⚔️</div>
     <div class="header-badges">
-        <span class="header-badge badge-bastardos">🩸 Os Bastardos</span>
+        <span class="header-badge badge-bastardos">🗡️ Os Bastardos</span>
         <span class="header-badge badge-anel">💍 Sociedade do Anel</span>
     </div>
     <div class="header-sub">Temporada 2026 · Rodada <span id="current-round">—</span> de 38 · Pontos medievais a partir da R6</div>
@@ -427,7 +427,7 @@
         <div class="nav-icon">🤝</div><div>Alianças</div>
     </button>
     <button class="nav-btn" onclick="switchTab('medieval',this)">
-        <div class="nav-icon">⚔️</div><div>Medieval</div>
+        <div class="nav-icon">🗡️</div><div>Medieval</div>
     </button>
     <button class="nav-btn" onclick="switchTab('battles',this)">
         <div class="nav-icon">🛡️</div><div>Batalhas</div>
@@ -457,7 +457,7 @@ const LORDS = [
 ];
 
 const ALLIANCES = {
-    bastardos: { label:'Os Bastardos',      icon:'🩸', members:'Varelitas · Lobonegro · Sons of Númenor · Ironverdict' },
+    bastardos: { label:'Os Bastardos',      icon:'🗡️', members:'Varelitas · Lobonegro · Sons of Númenor · Ironverdict' },
     anel:      { label:'Sociedade do Anel', icon:'💍', members:'Icebergteam · CEEC · Otopatamá · Andorinha Jr · Andorinha' },
 };
 
@@ -567,117 +567,110 @@ function calcMedieval(a) {
 // PROCESSAMENTO PRINCIPAL
 // ════════════════════════════════════════════════
 function processAll(BATTLES) {
+    // ── Regra: R1 a R(MEDIEVAL_START-1) não contam conquistas nem geram títulos nem pontos medievais.
+    // Apenas a partir de MEDIEVAL_START tudo se ativa.
+
     const ld = LORDS.map(l => ({...l,
         cartolaPoints:0, medievalPoints:0, totalPoints:0,
+        roundsPlayed:0,
         mvp:0, podio:0, mitada:0, recuperacao:0, massacre:0, lanterna:0, bonusG2:0,
         currentTitle:'📰 Escudeiro Sem Nome',
     }));
 
     const find = n => ld.find(l => l.name.toLowerCase().trim() === n.toLowerCase().trim());
 
-    const acum = {}; LORDS.forEach(l => acum[l.name]=0);
-    let prev = {};
+    // ── Pass 1: accumulate Cartola points and track rounds (all rounds)
+    BATTLES.forEach(battle => {
+        battle.results.forEach(r => {
+            const lord = find(r.name); if (!lord) return;
+            lord.cartolaPoints += r.points;
+            lord.roundsPlayed++;
+        });
+    });
 
-    BATTLES.forEach((battle, idx) => {
-        const active = battle.medievalActive;
+    // ── Pass 2: compute conquests and medieval points using ACTIVE rounds only
+    const activeRounds = BATTLES.filter(b => b.medievalActive);
+    const lastRound = BATTLES.length ? Math.max(...BATTLES.map(b=>b.week)) : 0;
+
+    const acum = {}; LORDS.forEach(l => acum[l.name]=0);
+    // We need cumulative acum up to each active round (for Massacre), 
+    // but Massacre uses overall ranking, so we need full acum including inactive rounds.
+    // Rebuild full cumulative first:
+    const fullAcum = {}; LORDS.forEach(l => fullAcum[l.name]=0);
+    const acumByRound = {}; // acumByRound[week] = snapshot after that round
+    BATTLES.forEach(battle => {
+        battle.results.forEach(r => fullAcum[r.name] = (fullAcum[r.name]||0) + r.points);
+        acumByRound[battle.week] = {...fullAcum};
+    });
+
+    let prev = {}; // previous ACTIVE round scores per lord (for Recuperação)
+
+    activeRounds.forEach((battle, idx) => {
         const sorted = [...battle.results].sort((a,b)=>b.points-a.points);
 
-        const before = {...acum};
-        battle.results.forEach(r => acum[r.name] = (acum[r.name]||0) + r.points);
-        const after  = {...acum};
+        // For massacre: ranking before and after this round in FULL acum
+        const prevRound = BATTLES.find(b => b.week === battle.week - 1);
+        let beforeSnap = {};
+        if (prevRound) {
+            beforeSnap = acumByRound[prevRound.week];
+        } else {
+            // first active round — use acum before first active round
+            // find the latest inactive round before this one
+            const prevInactive = BATTLES.filter(b => !b.medievalActive && b.week < battle.week);
+            if (prevInactive.length) beforeSnap = acumByRound[Math.max(...prevInactive.map(b=>b.week))];
+            else LORDS.forEach(l => beforeSnap[l.name]=0);
+        }
+        const afterSnap = acumByRound[battle.week];
 
-        const rankB = Object.entries(before).sort((a,b)=>b[1]-a[1]).map(e=>e[0]);
-        const rankA = Object.entries(after ).sort((a,b)=>b[1]-a[1]).map(e=>e[0]);
+        const rankB = Object.entries(beforeSnap).sort((a,b)=>b[1]-a[1]).map(e=>e[0]);
+        const rankA = Object.entries(afterSnap ).sort((a,b)=>b[1]-a[1]).map(e=>e[0]);
         const posB  = {}; rankB.forEach((n,i) => posB[n]=i);
         const posA  = {}; rankA.forEach((n,i) => posA[n]=i);
 
         sorted.forEach((r, pos) => {
             const lord = find(r.name); if (!lord) return;
-            lord.cartolaPoints += r.points;
 
-            // Conquistas (para títulos: sempre | para pontos: só se active)
-            const addAch = (key, bonus=0) => {
-                lord[key]++;
-                if (active && bonus) lord.bonusG2 += bonus;
-            };
-
-            if (pos===0 && r.points>0) {
-                lord.mvp++;
-            }
+            // MVP
+            if (pos===0 && r.points>0) lord.mvp++;
+            // Pódio
             if (pos===1||pos===2) lord.podio++;
+            // Mitada + G2 bonus
             if (r.points>=80) {
                 lord.mitada++;
-                if (active) {
-                    if      (r.points>=110) lord.bonusG2+=14;
-                    else if (r.points>=100) lord.bonusG2+=8;
-                    else if (r.points>=90)  lord.bonusG2+=4;
-                }
+                if      (r.points>=110) lord.bonusG2+=14;
+                else if (r.points>=100) lord.bonusG2+=8;
+                else if (r.points>=90)  lord.bonusG2+=4;
             }
+            // Lanterna
             if (pos===sorted.length-1 && r.points>0) lord.lanterna++;
+            // Recuperação (vs previous ACTIVE round)
             if (idx>0 && (prev[r.name]||0)>0 && (r.points - prev[r.name])>=50) lord.recuperacao++;
-
             // Massacre
             if (idx>0 && (posB[r.name]??999)>(posA[r.name]??999)) {
-                let hasMassacre = false;
+                let hm = false;
                 LORDS.forEach(o => {
                     if (o.name===r.name) return;
                     if ((posB[r.name]??999)>(posB[o.name]??999) && (posA[r.name]??999)<(posA[o.name]??999))
-                        if (((after[r.name]||0)-(after[o.name]||0))>=10) hasMassacre=true;
+                        if (((afterSnap[r.name]||0)-(afterSnap[o.name]||0))>=10) hm=true;
                 });
-                if (hasMassacre) lord.massacre++;
+                if (hm) lord.massacre++;
             }
         });
         battle.results.forEach(r => prev[r.name]=r.points);
     });
 
-    const lastRound = BATTLES.length ? Math.max(...BATTLES.map(b=>b.week)) : 0;
-
+    // ── Finalize: medieval points + titles
     ld.forEach(lord => {
-        // Only compute medieval points from round MEDIEVAL_START onward
-        // We re-process just the active rounds for point calculation
-        // (conquests above include all rounds for titles, bonusG2 only counted when active=true)
-        const activeRounds = BATTLES.filter(b=>b.medievalActive);
-
-        // Re-tally for active-only counts
-        const acumActive = {}; LORDS.forEach(l => acumActive[l.name]=0);
-        let prevA = {};
-        let actMvp=0,actPodio=0,actMitada=0,actRecup=0,actMassacre=0,actLanterna=0;
-
-        activeRounds.forEach((battle, idx) => {
-            const sorted = [...battle.results].sort((a,b)=>b.points-a.points);
-            const beforeA = {...acumActive};
-            battle.results.forEach(r => acumActive[r.name]=(acumActive[r.name]||0)+r.points);
-            const afterA = {...acumActive};
-            const rankBA = Object.entries(beforeA).sort((a,b)=>b[1]-a[1]).map(e=>e[0]);
-            const rankAA = Object.entries(afterA ).sort((a,b)=>b[1]-a[1]).map(e=>e[0]);
-            const posBA  = {}; rankBA.forEach((n,i)=>posBA[n]=i);
-            const posAA  = {}; rankAA.forEach((n,i)=>posAA[n]=i);
-
-            sorted.forEach((r, pos) => {
-                if (r.name !== lord.name) return;
-                if (pos===0 && r.points>0) actMvp++;
-                if (pos===1||pos===2)       actPodio++;
-                if (r.points>=80)           actMitada++;
-                if (pos===sorted.length-1 && r.points>0) actLanterna++;
-                if (idx>0 && (prevA[r.name]||0)>0 && (r.points-prevA[r.name])>=50) actRecup++;
-                if (idx>0 && (posBA[r.name]??999)>(posAA[r.name]??999)) {
-                    let hm=false;
-                    LORDS.forEach(o=>{
-                        if(o.name===r.name)return;
-                        if((posBA[r.name]??999)>(posBA[o.name]??999)&&(posAA[r.name]??999)<(posAA[o.name]??999))
-                            if(((afterA[r.name]||0)-(afterA[o.name]||0))>=10)hm=true;
-                    });
-                    if(hm) actMassacre++;
-                }
-            });
-            battle.results.forEach(r=>prevA[r.name]=r.points);
-        });
-
         lord.medievalPoints = lastRound < MEDIEVAL_START ? 0 :
-            calcMedieval({mvp:actMvp,podio:actPodio,mitada:actMitada,recuperacao:actRecup,massacre:actMassacre,lanterna:actLanterna}) + lord.bonusG2;
+            calcMedieval({
+                mvp:lord.mvp, podio:lord.podio, mitada:lord.mitada,
+                recuperacao:lord.recuperacao, massacre:lord.massacre, lanterna:lord.lanterna
+            }) + lord.bonusG2;
 
         lord.totalPoints = lord.cartolaPoints + lord.medievalPoints;
-        lord.currentTitle =
+
+        // Títulos só existem a partir de MEDIEVAL_START
+        lord.currentTitle = lastRound < MEDIEVAL_START ? '📰 Escudeiro Sem Nome' :
             getTitle('mvp',lord.mvp)||getTitle('mitada',lord.mitada)||
             getTitle('recuperacao',lord.recuperacao)||getTitle('massacre',lord.massacre)||
             getTitle('podio',lord.podio)||getTitle('lanterna',lord.lanterna)||'📰 Escudeiro Sem Nome';
@@ -756,8 +749,13 @@ function renderAliancas(data) {
     const bastardos = data.filter(l=>l.alliance==='bastardos');
     const anel      = data.filter(l=>l.alliance==='anel');
     const sumT = arr => arr.reduce((s,l)=>s+l.totalPoints,0);
+    const avgT = arr => sumT(arr) / arr.length;
+    const avgC = arr => arr.reduce((s,l)=>s+l.cartolaPoints,0) / arr.length;
     const bPts = sumT(bastardos), aPts = sumT(anel);
+    const bAvg = avgT(bastardos), aAvg = avgT(anel);
+    const bAvgC = avgC(bastardos), aAvgC = avgC(anel);
     const bWin = bPts > aPts, tie = bPts===aPts;
+    const bAvgWin = bAvg > aAvg;
 
     const memberRow = (lord, alKey) => `
     <div class="member-row ${alKey}">
@@ -768,37 +766,62 @@ function renderAliancas(data) {
         </div>
         <div class="member-pts">
             <div class="member-pts-main">${lord.totalPoints.toFixed(0)}</div>
-            <div class="member-pts-sub">📊 ${lord.cartolaPoints.toFixed(0)}</div>
+            <div class="member-pts-sub">📊 ${lord.cartolaPoints.toFixed(2)}</div>
         </div>
     </div>`;
+
+    const scoreRow = (label, bVal, aVal, bColor, aColor, fmt) => {
+        const bWins = parseFloat(bVal) > parseFloat(aVal);
+        const tied  = parseFloat(bVal) === parseFloat(aVal);
+        return `
+        <div style="display:flex;align-items:center;gap:8px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);">
+            <div style="flex:1;text-align:center;">
+                <span style="font-family:Cinzel,serif;font-size:1.25em;font-weight:900;color:${bColor}">${fmt(bVal)}</span>
+                ${!tied&&bWins?'<span style="margin-left:6px;font-size:0.75em;color:'+bColor+'">▲</span>':''}
+            </div>
+            <div style="font-family:Cinzel,serif;font-size:0.75em;color:var(--text-muted);text-align:center;min-width:80px;letter-spacing:0.06em;text-transform:uppercase">${label}</div>
+            <div style="flex:1;text-align:center;">
+                <span style="font-family:Cinzel,serif;font-size:1.25em;font-weight:900;color:${aColor}">${fmt(aVal)}</span>
+                ${!tied&&!bWins?'<span style="margin-left:6px;font-size:0.75em;color:'+aColor+'">▲</span>':''}
+            </div>
+        </div>`;
+    };
+
+    const bColor = 'var(--bastardos-light)', aColor = 'var(--anel-light)';
 
     const html = `
     <div class="scoreboard">
         <div class="scoreboard-title">Placar Geral das Alianças</div>
-        <div class="scoreboard-row">
+        <div class="scoreboard-row" style="margin-bottom:16px;">
             <div class="scoreboard-side">
-                <div class="scoreboard-pts" style="color:var(--bastardos-light)">${bPts.toFixed(0)}</div>
-                <div class="scoreboard-label" style="color:#ff8a80;">🩸 Os Bastardos</div>
-                ${!tie&&bWin?'<div class="scoreboard-winner" style="background:rgba(192,57,43,0.25);border:1px solid var(--bastardos);color:#ff8a80;">👑 Liderando</div>':''}
+                <div class="scoreboard-pts" style="color:${bColor}">${bPts.toFixed(0)}</div>
+                <div class="scoreboard-label" style="color:${bColor};">🗡️ Os Bastardos</div>
+                ${!tie&&bWin?`<div class="scoreboard-winner" style="background:rgba(90,100,112,0.2);border:1px solid var(--bastardos);color:${bColor};">👑 Liderando</div>`:''}
             </div>
             <div class="scoreboard-vs">VS</div>
             <div class="scoreboard-side">
-                <div class="scoreboard-pts" style="color:var(--anel-light)">${aPts.toFixed(0)}</div>
-                <div class="scoreboard-label" style="color:#80d8ff;">💍 Soc. do Anel</div>
-                ${!tie&&!bWin?'<div class="scoreboard-winner" style="background:rgba(26,107,138,0.25);border:1px solid var(--anel);color:#80d8ff;">👑 Liderando</div>':''}
+                <div class="scoreboard-pts" style="color:${aColor}">${aPts.toFixed(0)}</div>
+                <div class="scoreboard-label" style="color:${aColor};">💍 Soc. do Anel</div>
+                ${!tie&&!bWin?`<div class="scoreboard-winner" style="background:rgba(28,78,58,0.2);border:1px solid var(--anel);color:${aColor};">👑 Liderando</div>`:''}
             </div>
         </div>
+        ${scoreRow('Total', bPts, aPts, bColor, aColor, v => parseFloat(v).toFixed(0))}
+        ${scoreRow('Média / membro', bAvg, aAvg, bColor, aColor, v => parseFloat(v).toFixed(1))}
+        ${scoreRow('Média Cartola', bAvgC, aAvgC, bColor, aColor, v => parseFloat(v).toFixed(2))}
         ${tie?'<div style="margin-top:10px;text-align:center;font-family:Cinzel,serif;color:var(--amber);font-size:0.9em;">⚖️ Empate!</div>':''}
     </div>
 
     <div class="alliance-block">
         <div class="alliance-header-card bastardos">
-            <div class="alliance-icon">🩸</div>
+            <div class="alliance-icon">🗡️</div>
             <div class="alliance-info">
                 <div class="alliance-name bastardos">Os Bastardos</div>
                 <div class="alliance-subtitle">${ALLIANCES.bastardos.members}</div>
             </div>
-            <div class="alliance-total bastardos">${bPts.toFixed(0)}</div>
+            <div>
+                <div class="alliance-total bastardos">${bPts.toFixed(0)}</div>
+                <div style="font-size:0.75em;color:var(--text-muted);text-align:right;font-style:italic;">média ${bAvg.toFixed(1)}</div>
+            </div>
         </div>
         ${bastardos.sort((a,b)=>b.totalPoints-a.totalPoints).map(l=>memberRow(l,'bastardos')).join('')}
     </div>
@@ -812,7 +835,10 @@ function renderAliancas(data) {
                 <div class="alliance-name anel">Sociedade do Anel</div>
                 <div class="alliance-subtitle">${ALLIANCES.anel.members}</div>
             </div>
-            <div class="alliance-total anel">${aPts.toFixed(0)}</div>
+            <div>
+                <div class="alliance-total anel">${aPts.toFixed(0)}</div>
+                <div style="font-size:0.75em;color:var(--text-muted);text-align:right;font-style:italic;">média ${aAvg.toFixed(1)}</div>
+            </div>
         </div>
         ${anel.sort((a,b)=>b.totalPoints-a.totalPoints).map(l=>memberRow(l,'anel')).join('')}
     </div>`;
@@ -826,40 +852,55 @@ function renderAliancas(data) {
 function renderMedieval(data, lastRound) {
     const locked = lastRound < MEDIEVAL_START;
     let html = locked
-        ? `<div class="notice-banner">⏳ Pontos medievais ativam na <strong>Rodada ${MEDIEVAL_START}</strong>. As conquistas já estão sendo registradas mas <strong>não geram pontos ainda</strong>.</div>`
-        : `<div class="notice-banner">⚔️ Pontos medievais ativos desde a <strong>Rodada ${MEDIEVAL_START}</strong>. Conquistas das R1–R${MEDIEVAL_START-1} contam para títulos mas <strong>não geraram pontos</strong>.</div>`;
+        ? `<div class="notice-banner">⏳ Pontos medievais e títulos ativam na <strong>Rodada ${MEDIEVAL_START}</strong>.<br>Todas as conquistas começam do zero a partir dessa rodada.</div>`
+        : `<div class="notice-banner">⚔️ Pontos medievais ativos desde a <strong>Rodada ${MEDIEVAL_START}</strong>.</div>`;
 
-    html += [...data].sort((a,b)=>b.medievalPoints-a.medievalPoints).map(lord => {
-        const mc = lord.medievalPoints>0?'#4CAF50':lord.medievalPoints<0?'#e74c3c':'#666';
-        const ms = lord.medievalPoints>0?'+':'';
-        return `
-        <div class="lord-card" style="border-color:${lord.color}">
+    if (locked) {
+        // Show all lords with locked state, no conquest counters
+        html += [...data].sort((a,b)=>a.name.localeCompare(b.name)).map(lord => `
+        <div class="lord-card" style="border-color:rgba(60,58,70,0.5)">
             <div class="lord-header">
-                <div class="avatar">${lord.avatar}</div>
+                <div class="avatar" style="opacity:0.5">${lord.avatar}</div>
                 <div class="lord-info">
-                    <div class="lord-name">${lord.name}</div>
+                    <div class="lord-name" style="color:var(--text-muted)">${lord.name}</div>
                     ${allianceTag(lord)}
-                    <div class="lord-title-text">${lord.currentTitle}</div>
+                    <div class="lord-title-text">📰 Escudeiro Sem Nome</div>
                 </div>
             </div>
-            <div class="points-display">
-                <div class="total-points" style="color:${locked?'#555':mc}">
-                    ${locked?'—':ms+lord.medievalPoints}
-                </div>
-                <div style="font-size:0.88em;color:var(--amber);font-style:italic;">
-                    ${locked?`Aguardando R${MEDIEVAL_START}`:'Pontos Medievais'}
-                </div>
+            <div class="points-display" style="opacity:0.4">
+                <div class="total-points" style="color:#333">—</div>
+                <div style="font-size:0.88em;color:var(--text-muted);font-style:italic;">Aguardando Rodada ${MEDIEVAL_START}</div>
             </div>
-            <div class="stats-grid">
-                <div class="stat-item"><div class="stat-label">🏆 MVP</div><div class="stat-value">${lord.mvp}x</div></div>
-                <div class="stat-item"><div class="stat-label">💀 Mitada</div><div class="stat-value">${lord.mitada}x</div></div>
-                <div class="stat-item"><div class="stat-label">🥇 Pódio</div><div class="stat-value">${lord.podio}x</div></div>
-                <div class="stat-item"><div class="stat-label">📈 Recup.</div><div class="stat-value">${lord.recuperacao}x</div></div>
-                <div class="stat-item"><div class="stat-label">🗡️ Massacre</div><div class="stat-value">${lord.massacre}x</div></div>
-                <div class="stat-item"><div class="stat-label">📦 Lanterna</div><div class="stat-value negative">${lord.lanterna}x</div></div>
-            </div>
-        </div>`;
-    }).join('');
+        </div>`).join('');
+    } else {
+        html += [...data].sort((a,b)=>b.medievalPoints-a.medievalPoints).map(lord => {
+            const mc = lord.medievalPoints>0?'var(--copper-light)':lord.medievalPoints<0?'#8C3A3A':'#555';
+            const ms = lord.medievalPoints>0?'+':'';
+            return `
+            <div class="lord-card" style="border-color:${lord.color}">
+                <div class="lord-header">
+                    <div class="avatar">${lord.avatar}</div>
+                    <div class="lord-info">
+                        <div class="lord-name">${lord.name}</div>
+                        ${allianceTag(lord)}
+                        <div class="lord-title-text">${lord.currentTitle}</div>
+                    </div>
+                </div>
+                <div class="points-display">
+                    <div class="total-points" style="color:${mc}">${ms}${lord.medievalPoints}</div>
+                    <div style="font-size:0.88em;color:var(--amber);font-style:italic;">Pontos Medievais</div>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-item"><div class="stat-label">🏆 MVP</div><div class="stat-value">${lord.mvp}x</div></div>
+                    <div class="stat-item"><div class="stat-label">💀 Mitada</div><div class="stat-value">${lord.mitada}x</div></div>
+                    <div class="stat-item"><div class="stat-label">🥇 Pódio</div><div class="stat-value">${lord.podio}x</div></div>
+                    <div class="stat-item"><div class="stat-label">📈 Recup.</div><div class="stat-value">${lord.recuperacao}x</div></div>
+                    <div class="stat-item"><div class="stat-label">🗡️ Massacre</div><div class="stat-value">${lord.massacre}x</div></div>
+                    <div class="stat-item"><div class="stat-label">📦 Lanterna</div><div class="stat-value negative">${lord.lanterna}x</div></div>
+                </div>
+            </div>`;
+        }).join('');
+    }
     document.getElementById('medieval-list').innerHTML = html;
 }
 
@@ -964,7 +1005,7 @@ function renderRules() {
         <div class="rules-group-title">🤝 ALIANÇAS</div>
         <table class="rules-table">
             <tr><th>Aliança</th><th>Membros</th></tr>
-            <tr><td style="color:#ff8a80;font-weight:700">🩸 Os Bastardos</td><td>Varelitas, Lobonegro, Sons of Númenor, Ironverdict</td></tr>
+            <tr><td style="color:#ff8a80;font-weight:700">🗡️ Os Bastardos</td><td>Varelitas, Lobonegro, Sons of Númenor, Ironverdict</td></tr>
             <tr><td style="color:#80d8ff;font-weight:700">💍 Soc. do Anel</td><td>Icebergteam, CEEC, Otopatamá, Andorinha Jr, Andorinha</td></tr>
         </table>
         <div class="rule-note">A pontuação da aliança é a soma dos pontos totais (Cartola + Medieval) de todos os membros.</div>
