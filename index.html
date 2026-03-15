@@ -17,14 +17,14 @@
             --amber-dim: #8A5C06;
             --copper: #B5622A;
             --copper-light: #D4824A;
-            --bg-deep: #080A0E;
-            --bg-mid: #0E1118;
-            --bg-card: rgba(14,17,26,0.98);
-            --bg-card2: rgba(20,24,36,0.96);
-            --border-subtle: rgba(200,134,10,0.15);
-            --text: #DDD5C8;
-            --text-bright: #EDE8E0;
-            --text-muted: #8A879A;
+            --bg-deep: #0D1017;
+            --bg-mid: #141820;
+            --bg-card: rgba(22,27,42,0.98);
+            --bg-card2: rgba(28,34,52,0.96);
+            --border-subtle: rgba(200,134,10,0.22);
+            --text: #E2D8CC;
+            --text-bright: #F2EDE6;
+            --text-muted: #9C9AB0;
             /* Alianças */
             --bastardos: #5A6470;
             --bastardos-light: #B0BEC5;
@@ -41,10 +41,11 @@
             font-family: 'Crimson Text', Georgia, serif;
             background: var(--bg-deep);
             background-image:
-                radial-gradient(ellipse at 20% 10%, rgba(90,100,112,0.08) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 90%, rgba(28,78,58,0.08) 0%, transparent 50%),
-                radial-gradient(ellipse at 50% 50%, rgba(200,134,10,0.04) 0%, transparent 65%),
-                linear-gradient(180deg, #080A0E 0%, #0A0D14 100%);
+                radial-gradient(ellipse at 15% 10%, rgba(90,100,112,0.12) 0%, transparent 45%),
+                radial-gradient(ellipse at 85% 85%, rgba(28,78,58,0.12) 0%, transparent 45%),
+                radial-gradient(ellipse at 55% 88%, rgba(45,27,78,0.10) 0%, transparent 40%),
+                radial-gradient(ellipse at 50% 40%, rgba(200,134,10,0.06) 0%, transparent 60%),
+                linear-gradient(180deg, #0D1017 0%, #10141E 100%);
             color: var(--text);
             min-height: 100vh;
             padding-bottom: 100px;
@@ -73,7 +74,7 @@
         /* HEADER */
         .header {
             position:sticky; top:0; z-index:100;
-            background: linear-gradient(160deg, #080A0E 0%, #12100A 50%, #080A0E 100%);
+            background: linear-gradient(160deg, var(--bg-deep) 0%, var(--bg-mid) 50%, var(--bg-deep) 100%);
             padding:14px 16px 12px;
             border-bottom:2px solid var(--amber-dim);
             box-shadow:0 2px 30px rgba(0,0,0,0.9), 0 1px 0 rgba(200,134,10,0.12) inset;
@@ -139,7 +140,7 @@
         .pos-1 { background:linear-gradient(135deg,#C8860A,#7A5006); color:#FFF0D0; }
         .pos-2 { background:linear-gradient(135deg,#707070,#404040); color:#E0E0E0; }
         .pos-3 { background:linear-gradient(135deg,#8B4E22,#5A3010); color:#FFE0C0; }
-        .pos-n { background:rgba(20,22,30,0.8); color:#504860; border-color:rgba(80,72,96,0.3); }
+        .pos-n { background:rgba(28,30,46,0.9); color:var(--text-muted); border-color:rgba(120,115,150,0.3); }
 
         .avatar { font-size:2.8em; flex-shrink:0; line-height:1; }
         .lord-info { flex:1; min-width:0; }
@@ -163,7 +164,7 @@
 
         /* POINTS */
         .points-display {
-            background:rgba(200,134,10,0.05); border:1px solid rgba(200,134,10,0.12);
+            background:rgba(200,134,10,0.08); border:1px solid rgba(200,134,10,0.2);
             border-radius:5px; padding:12px; margin-bottom:12px; text-align:center;
         }
         .total-points {
@@ -185,7 +186,7 @@
             display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; margin-bottom:10px;
         }
         .stat-item {
-            background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.05);
+            background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.09);
             padding:11px 8px; border-radius:4px; text-align:center;
         }
         .stat-label { font-size:0.85em; color:var(--text-muted); margin-bottom:4px; }
@@ -208,19 +209,6 @@
         .scoreboard-title {
             font-family:'Cinzel',serif; font-size:0.82em; color:var(--text-muted);
             letter-spacing:0.1em; text-transform:uppercase; text-align:center; margin-bottom:14px;
-        }
-        .scoreboard-row { display:flex; align-items:center; justify-content:space-between; gap:8px; }
-        .scoreboard-side { flex:1; text-align:center; }
-        .scoreboard-pts { font-family:'Cinzel',serif; font-size:2.2em; font-weight:900; line-height:1; }
-        .scoreboard-label { font-size:0.88em; font-style:italic; margin-top:4px; }
-        .scoreboard-winner {
-            display:inline-block; margin-top:6px;
-            font-family:'Cinzel',serif; font-size:0.72em; padding:2px 10px;
-            border-radius:3px; font-weight:700;
-        }
-        .scoreboard-vs {
-            font-family:'Cinzel',serif; font-size:1.5em; font-weight:900;
-            color:var(--amber-dim); flex-shrink:0;
         }
 
         .alliance-block { margin-bottom:24px; }
@@ -267,16 +255,11 @@
         .member-pts-main { font-family:'Cinzel',serif; font-size:1.25em; font-weight:700; color:var(--amber-light); }
         .member-pts-sub { font-size:0.8em; color:var(--text-muted); }
 
-        .alliance-vs-divider {
-            text-align:center; font-family:'Cinzel',serif;
-            font-size:1.1em; font-weight:900; color:var(--amber-dim);
-            margin:4px 0 18px; letter-spacing:0.2em;
-        }
 
         /* BATTLE CARDS */
         .battle-card {
             background:var(--bg-card); padding:16px; margin-bottom:14px;
-            border-radius:6px; border:1px solid rgba(200,134,10,0.1);
+            border-radius:6px; border:1px solid rgba(200,134,10,0.18);
             cursor:pointer; transition:border-color 0.2s;
         }
         .battle-card:active { border-color:var(--amber-dim); }
@@ -284,7 +267,7 @@
             font-family:'Cinzel',serif; font-size:0.82em; color:var(--text-muted);
             text-transform:uppercase; letter-spacing:0.1em; margin-bottom:3px;
         }
-        .battle-locked-note { font-size:0.75em; color:#2E2A38; font-style:italic; margin-left:6px; }
+        .battle-locked-note { font-size:0.75em; color:var(--text-muted); opacity:0.6; font-style:italic; margin-left:6px; }
         .battle-name {
             font-family:'Cinzel',serif; font-size:1.1em; font-weight:700;
             color:var(--text-bright); margin-bottom:10px; line-height:1.3;
@@ -362,11 +345,11 @@
 
         .footer { margin-top:22px; padding:16px 14px; text-align:center; border-top:1px solid rgba(200,134,10,0.08); }
         .footer-quote { font-size:1em; color:var(--amber-dim); font-style:italic; line-height:1.5; margin-bottom:6px; }
-        .footer-info { font-size:0.82em; color:#242028; }
+        .footer-info { font-size:0.82em; color:var(--text-muted); }
         .divider { border:none; border-top:1px solid rgba(255,255,255,0.05); margin:18px 0; }
 
         ::-webkit-scrollbar { width:6px; }
-        ::-webkit-scrollbar-track { background:#080A0E; }
+        ::-webkit-scrollbar-track { background:#0D1017; }
         ::-webkit-scrollbar-thumb { background:var(--amber-dim); border-radius:3px; }
         ::-webkit-scrollbar-thumb:hover { background:var(--amber); }
     </style>
@@ -606,10 +589,7 @@ function processAll(BATTLES) {
     const activeRounds = BATTLES.filter(b => b.medievalActive);
     const lastRound = BATTLES.length ? Math.max(...BATTLES.map(b=>b.week)) : 0;
 
-    const acum = {}; LORDS.forEach(l => acum[l.name]=0);
-    // We need cumulative acum up to each active round (for Massacre), 
-    // but Massacre uses overall ranking, so we need full acum including inactive rounds.
-    // Rebuild full cumulative first:
+    // Cumulative acum per round for Massacre ranking comparison:
     const fullAcum = {}; LORDS.forEach(l => fullAcum[l.name]=0);
     const acumByRound = {}; // acumByRound[week] = snapshot after that round
     BATTLES.forEach(battle => {
@@ -936,19 +916,10 @@ function renderAchievements(data) {
 
     let html = '<div style="margin-bottom:16px;text-align:center;font-family:Cinzel,serif;color:var(--amber);font-size:1em;letter-spacing:0.05em;">⭐ DESTAQUES DA TEMPORADA ⭐</div>';
 
-    const hallCard = (lord, category, colorTop, colorBg, achText, titleColor) =>
-        `<div class="hall-card" style="background:${colorBg};border:2px solid ${colorTop};">
-            <div class="hall-avatar">${lord.avatar}</div>
-            <div class="hall-category" style="color:${colorTop};">${category}</div>
-            <div class="hall-name" style="color:var(--text-bright);">${lord.name}</div>
-            <div class="hall-achievement">${achText}</div>
-            <div class="hall-title" style="color:${titleColor};">${getTitle(category.includes('MVP')?'mvp':category.includes('MESTRE')?'mitada':category.includes('FÊNIX')?'recuperacao':'massacre', lord[category.includes('MVP')?'mvp':category.includes('MESTRE')?'mitada':category.includes('FÊNIX')?'recuperacao':'massacre'])}</div>
-        </div>`;
-
-    if (mvpK?.mvp>0)           html+=`<div class="hall-card" style="background:linear-gradient(135deg,#1A1200,#2A1E06);border:1px solid var(--amber-dim);"><div class="hall-avatar">${mvpK.avatar}</div><div class="hall-category" style="color:var(--amber-light);">🏆 REI DAS VITÓRIAS</div><div class="hall-name" style="color:var(--amber-light);">${mvpK.name}</div><div class="hall-achievement">${mvpK.mvp}x MVP</div><div class="hall-title" style="color:#7A6A54;">${getTitle('mvp',mvpK.mvp)}</div></div>`;
-    if (mitK?.mitada>0)        html+=`<div class="hall-card" style="background:linear-gradient(135deg,#0E0808,#1A0A0A);border:1px solid #6A2A2A;"><div class="hall-avatar">${mitK.avatar}</div><div class="hall-category" style="color:#ff6b6b;">💀 MESTRE DA DESTRUIÇÃO</div><div class="hall-name" style="color:var(--text-bright);">${mitK.name}</div><div class="hall-achievement">${mitK.mitada}x Mitada</div><div class="hall-title" style="color:#A06060;">${getTitle('mitada',mitK.mitada)}</div></div>`;
-    if (recK?.recuperacao>0)   html+=`<div class="hall-card" style="background:linear-gradient(135deg,#080E12,#0C1A18);border:1px solid #1A4A3A;"><div class="hall-avatar">${recK.avatar}</div><div class="hall-category" style="color:#74b9ff;">📈 A FÊNIX IMORTAL</div><div class="hall-name" style="color:var(--text-bright);">${recK.name}</div><div class="hall-achievement">${recK.recuperacao}x Recuperação</div><div class="hall-title" style="color:#5A8870;">${getTitle('recuperacao',recK.recuperacao)}</div></div>`;
-    if (masK?.massacre>0)      html+=`<div class="hall-card" style="background:linear-gradient(135deg,#0A080E,#120C18);border:1px solid #3A2A4A;"><div class="hall-avatar">${masK.avatar}</div><div class="hall-category" style="color:#c39bd3;">🗡️ SENHOR DO MASSACRE</div><div class="hall-name" style="color:var(--text-bright);">${masK.name}</div><div class="hall-achievement">${masK.massacre}x Massacre</div><div class="hall-title" style="color:#8A7A9A;">${getTitle('massacre',masK.massacre)}</div></div>`;
+    if (mvpK?.mvp>0)           html+=`<div class="hall-card" style="background:linear-gradient(135deg,#221A04,#2E2208);border:1px solid var(--amber-dim);"><div class="hall-avatar">${mvpK.avatar}</div><div class="hall-category" style="color:var(--amber-light);">🏆 REI DAS VITÓRIAS</div><div class="hall-name" style="color:var(--amber-light);">${mvpK.name}</div><div class="hall-achievement">${mvpK.mvp}x MVP</div><div class="hall-title" style="color:#9A8A6A;">${getTitle('mvp',mvpK.mvp)}</div></div>`;
+    if (mitK?.mitada>0)        html+=`<div class="hall-card" style="background:linear-gradient(135deg,#1E0E0E,#2A1212);border:1px solid #8A3A3A;"><div class="hall-avatar">${mitK.avatar}</div><div class="hall-category" style="color:#ff6b6b;">💀 MESTRE DA DESTRUIÇÃO</div><div class="hall-name" style="color:var(--text-bright);">${mitK.name}</div><div class="hall-achievement">${mitK.mitada}x Mitada</div><div class="hall-title" style="color:#C07878;">${getTitle('mitada',mitK.mitada)}</div></div>`;
+    if (recK?.recuperacao>0)   html+=`<div class="hall-card" style="background:linear-gradient(135deg,#0E1A20,#102420);border:1px solid #2A6A52;"><div class="hall-avatar">${recK.avatar}</div><div class="hall-category" style="color:#74b9ff;">📈 A FÊNIX IMORTAL</div><div class="hall-name" style="color:var(--text-bright);">${recK.name}</div><div class="hall-achievement">${recK.recuperacao}x Recuperação</div><div class="hall-title" style="color:#6AAA88;">${getTitle('recuperacao',recK.recuperacao)}</div></div>`;
+    if (masK?.massacre>0)      html+=`<div class="hall-card" style="background:linear-gradient(135deg,#160E20,#1C1028);border:1px solid #5A3A7A;"><div class="hall-avatar">${masK.avatar}</div><div class="hall-category" style="color:#c39bd3;">🗡️ SENHOR DO MASSACRE</div><div class="hall-name" style="color:var(--text-bright);">${masK.name}</div><div class="hall-achievement">${masK.massacre}x Massacre</div><div class="hall-title" style="color:#A88EC0;">${getTitle('massacre',masK.massacre)}</div></div>`;
 
     html += '<hr class="divider"><div style="font-family:Cinzel,serif;color:var(--amber);font-size:0.95em;margin-bottom:14px;letter-spacing:0.05em;">📜 TODOS OS TÍTULOS</div>';
     html += data.map(lord=>`
