@@ -24,7 +24,7 @@
             --border-subtle: rgba(200,134,10,0.15);
             --text: #DDD5C8;
             --text-bright: #EDE8E0;
-            --text-muted: #6B6878;
+            --text-muted: #8A879A;
             /* Alianças */
             --bastardos: #5A6470;
             --bastardos-light: #B0BEC5;
@@ -32,6 +32,9 @@
             --anel: #1C4E3A;
             --anel-light: #2E7A58;
             --anel-glow: rgba(28,78,58,0.35);
+            --northclaw: #2D1B4E;
+            --northclaw-light: #A855F7;
+            --northclaw-glow: rgba(45,27,78,0.35);
         }
 
         body {
@@ -44,8 +47,8 @@
                 linear-gradient(180deg, #080A0E 0%, #0A0D14 100%);
             color: var(--text);
             min-height: 100vh;
-            padding-bottom: 90px;
-            font-size: 18px;
+            padding-bottom: 100px;
+            font-size: 20px;
         }
 
         /* LOADING */
@@ -76,7 +79,7 @@
             box-shadow:0 2px 30px rgba(0,0,0,0.9), 0 1px 0 rgba(200,134,10,0.12) inset;
         }
         .header-title {
-            font-family:'Cinzel',serif; font-size:1.28em; font-weight:900;
+            font-family:'Cinzel',serif; font-size:1.4em; font-weight:900;
             color:var(--amber-light); text-align:center; letter-spacing:0.05em;
             text-shadow:0 0 24px rgba(232,160,32,0.25), 1px 1px 3px rgba(0,0,0,0.9);
             line-height:1.2;
@@ -89,35 +92,36 @@
             padding:3px 10px; border-radius:3px;
             letter-spacing:0.04em; font-weight:700;
         }
-        .badge-bastardos { background:rgba(90,100,112,0.2); border:1px solid rgba(176,190,197,0.4); color:#B0BEC5; }
-        .badge-anel      { background:rgba(28,78,58,0.2);  border:1px solid rgba(46,122,88,0.5);  color:#2E7A58; }
+        .badge-bastardos  { background:rgba(90,100,112,0.2); border:1px solid rgba(176,190,197,0.4); color:#B0BEC5; }
+        .badge-anel       { background:rgba(28,78,58,0.2);  border:1px solid rgba(46,122,88,0.5);  color:#2E7A58; }
+        .badge-northclaw  { background:rgba(45,27,78,0.2);  border:1px solid rgba(168,85,247,0.5); color:#C084FC; }
         .header-sub {
             font-family:'Crimson Text',serif; font-size:0.85em; color:var(--text-muted);
             text-align:center; margin-top:5px; font-style:italic;
         }
 
         /* CONTENT */
-        .content { padding:16px 14px; max-width:640px; margin:0 auto; }
+        .content { padding:18px 16px; max-width:640px; margin:0 auto; }
 
         .section-title {
-            font-family:'Cinzel',serif; font-size:1.22em; font-weight:700;
-            color:var(--amber-light); margin-bottom:16px; padding-bottom:10px;
+            font-family:'Cinzel',serif; font-size:1.3em; font-weight:700;
+            color:var(--amber-light); margin-bottom:18px; padding-bottom:12px;
             border-bottom:1px solid var(--amber-dim); letter-spacing:0.06em;
         }
 
         /* NOTICE */
         .notice-banner {
             background:rgba(200,134,10,0.06); border:1px solid rgba(200,134,10,0.2);
-            border-radius:6px; padding:12px 15px; margin-bottom:16px;
-            font-size:0.9em; color:#9A8060; font-style:italic;
-            line-height:1.5; text-align:center;
+            border-radius:6px; padding:14px 16px; margin-bottom:18px;
+            font-size:0.95em; color:#9A8060; font-style:italic;
+            line-height:1.6; text-align:center;
         }
         .notice-banner strong { font-style:normal; color:var(--amber-light); }
 
         /* LORD CARDS */
         .lord-card {
-            background:var(--bg-card); padding:16px; margin-bottom:14px;
-            border-radius:6px; border:1px solid;
+            background:var(--bg-card); padding:18px; margin-bottom:16px;
+            border-radius:8px; border:1px solid;
             box-shadow:0 8px 32px rgba(0,0,0,0.6), 0 1px 0 rgba(255,255,255,0.03) inset;
             position:relative; transition:transform 0.2s, box-shadow 0.2s;
         }
@@ -127,9 +131,9 @@
         .lord-header { display:flex; align-items:center; gap:12px; margin-bottom:12px; }
 
         .position-badge {
-            width:48px; height:48px; border-radius:4px;
+            width:54px; height:54px; border-radius:4px;
             display:flex; align-items:center; justify-content:center;
-            font-family:'Cinzel',serif; font-size:1.4em; font-weight:900;
+            font-family:'Cinzel',serif; font-size:1.5em; font-weight:900;
             border:1px solid rgba(200,134,10,0.3); flex-shrink:0;
         }
         .pos-1 { background:linear-gradient(135deg,#C8860A,#7A5006); color:#FFF0D0; }
@@ -137,22 +141,23 @@
         .pos-3 { background:linear-gradient(135deg,#8B4E22,#5A3010); color:#FFE0C0; }
         .pos-n { background:rgba(20,22,30,0.8); color:#504860; border-color:rgba(80,72,96,0.3); }
 
-        .avatar { font-size:2.6em; flex-shrink:0; line-height:1; }
+        .avatar { font-size:2.8em; flex-shrink:0; line-height:1; }
         .lord-info { flex:1; min-width:0; }
         .lord-name {
-            font-family:'Cinzel',serif; font-size:1.1em; font-weight:700;
-            color:var(--text-bright); margin-bottom:3px; line-height:1.2;
+            font-family:'Cinzel',serif; font-size:1.2em; font-weight:700;
+            color:var(--text-bright); margin-bottom:4px; line-height:1.2;
         }
-        .lord-house { font-size:0.9em; margin-bottom:3px; font-weight:600; opacity:0.85; }
-        .lord-title-text { font-size:0.85em; color:var(--amber); font-style:italic; }
+        .lord-house { font-size:0.95em; margin-bottom:3px; font-weight:600; opacity:0.9; }
+        .lord-title-text { font-size:0.9em; color:var(--amber); font-style:italic; }
 
         .alliance-tag {
-            display:inline-block; font-size:0.72em; font-family:'Cinzel',serif;
-            padding:2px 8px; border-radius:3px; margin-top:3px;
+            display:inline-block; font-size:0.78em; font-family:'Cinzel',serif;
+            padding:3px 10px; border-radius:3px; margin-top:3px;
             font-weight:700; letter-spacing:0.03em;
         }
-        .tag-bastardos { background:rgba(90,100,112,0.18); border:1px solid rgba(176,190,197,0.35); color:#9AAAB8; }
-        .tag-anel      { background:rgba(28,78,58,0.18);  border:1px solid rgba(46,122,88,0.4);  color:#3A8A66; }
+        .tag-bastardos  { background:rgba(90,100,112,0.18); border:1px solid rgba(176,190,197,0.35); color:#9AAAB8; }
+        .tag-anel       { background:rgba(28,78,58,0.18);  border:1px solid rgba(46,122,88,0.4);  color:#3A8A66; }
+        .tag-northclaw  { background:rgba(45,27,78,0.22); border:1px solid rgba(168,85,247,0.4); color:#C084FC; }
 
         .crown-icon { position:absolute; top:10px; right:10px; font-size:1.8em; opacity:0.9; }
 
@@ -162,13 +167,13 @@
             border-radius:5px; padding:12px; margin-bottom:12px; text-align:center;
         }
         .total-points {
-            font-family:'Cinzel',serif; font-size:2.4em; font-weight:900;
-            color:var(--amber-light); line-height:1; margin-bottom:6px;
+            font-family:'Cinzel',serif; font-size:2.6em; font-weight:900;
+            color:var(--amber-light); line-height:1; margin-bottom:8px;
             text-shadow:0 0 20px rgba(200,134,10,0.2);
         }
         .points-breakdown {
             display:flex; justify-content:center; gap:16px;
-            font-size:1em; font-weight:600; flex-wrap:wrap;
+            font-size:1.05em; font-weight:600; flex-wrap:wrap;
         }
         .pts-cartola      { color:#4A8C5C; }
         .pts-medieval-pos { color:var(--copper-light); }
@@ -177,21 +182,21 @@
 
         /* STATS */
         .stats-grid {
-            display:grid; grid-template-columns:1fr 1fr 1fr; gap:7px; margin-bottom:10px;
+            display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; margin-bottom:10px;
         }
         .stat-item {
             background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.05);
-            padding:9px 7px; border-radius:4px; text-align:center;
+            padding:11px 8px; border-radius:4px; text-align:center;
         }
-        .stat-label { font-size:0.8em; color:var(--text-muted); margin-bottom:3px; }
-        .stat-value { font-family:'Cinzel',serif; font-size:1.25em; font-weight:700; color:var(--text-bright); }
+        .stat-label { font-size:0.85em; color:var(--text-muted); margin-bottom:4px; }
+        .stat-value { font-family:'Cinzel',serif; font-size:1.3em; font-weight:700; color:var(--text-bright); }
         .stat-value.negative { color:#7A3030; }
 
         /* EXPAND */
         .lord-details { display:none; margin-top:10px; padding-top:10px; border-top:1px solid rgba(255,255,255,0.06); }
         .lord-details.show { display:block; }
         .expand-btn {
-            text-align:center; padding:9px; font-size:0.85em; color:var(--text-muted);
+            text-align:center; padding:11px; font-size:0.92em; color:var(--text-muted);
             background:rgba(255,255,255,0.02); border-radius:4px; margin-top:8px; font-style:italic;
         }
 
@@ -231,29 +236,36 @@
             background:linear-gradient(135deg,rgba(28,78,58,0.15),rgba(28,78,58,0.04));
             border:1px solid rgba(46,122,88,0.35);
         }
+        .alliance-header-card.northclaw {
+            background:linear-gradient(135deg,rgba(45,27,78,0.2),rgba(45,27,78,0.05));
+            border:1px solid rgba(168,85,247,0.35);
+        }
         .alliance-icon { font-size:2.6em; flex-shrink:0; }
         .alliance-info { flex:1; }
         .alliance-name { font-family:'Cinzel',serif; font-size:1.12em; font-weight:900; letter-spacing:0.04em; }
-        .alliance-name.bastardos { color:#9AAAB8; }
-        .alliance-name.anel      { color:#3A8060; }
+        .alliance-name.bastardos  { color:#9AAAB8; }
+        .alliance-name.anel       { color:#3A8060; }
+        .alliance-name.northclaw  { color:#C084FC; }
         .alliance-subtitle { font-size:0.82em; color:var(--text-muted); font-style:italic; margin-top:2px; }
         .alliance-total { font-family:'Cinzel',serif; font-size:1.9em; font-weight:900; text-align:right; }
-        .alliance-total.bastardos { color:var(--bastardos-light); }
-        .alliance-total.anel      { color:var(--anel-light); }
+        .alliance-total.bastardos  { color:var(--bastardos-light); }
+        .alliance-total.anel       { color:var(--anel-light); }
+        .alliance-total.northclaw  { color:var(--northclaw-light); }
 
         .member-row {
             display:flex; align-items:center; gap:10px;
             padding:11px 13px; border-radius:5px; margin-bottom:7px; border:1px solid;
         }
-        .member-row.bastardos { border-color:rgba(90,100,112,0.3); background:rgba(90,100,112,0.04); }
-        .member-row.anel      { border-color:rgba(28,78,58,0.3);  background:rgba(28,78,58,0.04); }
-        .member-avatar { font-size:1.9em; flex-shrink:0; }
+        .member-row.bastardos  { border-color:rgba(90,100,112,0.3); background:rgba(90,100,112,0.04); }
+        .member-row.anel       { border-color:rgba(28,78,58,0.3);  background:rgba(28,78,58,0.04); }
+        .member-row.northclaw  { border-color:rgba(168,85,247,0.25); background:rgba(45,27,78,0.06); }
+        .member-avatar { font-size:2em; flex-shrink:0; }
         .member-info { flex:1; }
-        .member-name { font-family:'Cinzel',serif; font-size:0.98em; font-weight:700; color:var(--text-bright); }
-        .member-title { font-size:0.8em; color:var(--amber-dim); font-style:italic; }
+        .member-name { font-family:'Cinzel',serif; font-size:1.05em; font-weight:700; color:var(--text-bright); }
+        .member-title { font-size:0.85em; color:var(--amber-dim); font-style:italic; }
         .member-pts { text-align:right; }
-        .member-pts-main { font-family:'Cinzel',serif; font-size:1.15em; font-weight:700; color:var(--amber-light); }
-        .member-pts-sub { font-size:0.75em; color:var(--text-muted); }
+        .member-pts-main { font-family:'Cinzel',serif; font-size:1.25em; font-weight:700; color:var(--amber-light); }
+        .member-pts-sub { font-size:0.8em; color:var(--text-muted); }
 
         .alliance-vs-divider {
             text-align:center; font-family:'Cinzel',serif;
@@ -274,10 +286,10 @@
         }
         .battle-locked-note { font-size:0.75em; color:#2E2A38; font-style:italic; margin-left:6px; }
         .battle-name {
-            font-family:'Cinzel',serif; font-size:1.05em; font-weight:700;
-            color:var(--text-bright); margin-bottom:8px; line-height:1.3;
+            font-family:'Cinzel',serif; font-size:1.1em; font-weight:700;
+            color:var(--text-bright); margin-bottom:10px; line-height:1.3;
         }
-        .battle-winner { font-size:1em; color:#3A7A50; font-weight:600; margin-bottom:8px; }
+        .battle-winner { font-size:1.05em; color:#3A7A50; font-weight:600; margin-bottom:10px; }
         .battle-results { display:none; margin-top:14px; padding-top:14px; border-top:1px solid rgba(255,255,255,0.05); }
         .battle-results.show { display:block; }
         .result-row {
@@ -285,10 +297,10 @@
             padding:11px; margin-bottom:6px; border-radius:4px; border:1px solid;
         }
         .result-left { display:flex; align-items:center; gap:9px; flex:1; }
-        .result-avatar { font-size:1.7em; }
-        .result-name { font-size:1em; font-weight:600; color:var(--text-bright); }
-        .result-badges { font-size:0.92em; margin-top:2px; }
-        .result-pts { font-family:'Cinzel',serif; font-size:1.2em; font-weight:700; color:var(--amber-light); min-width:65px; text-align:right; }
+        .result-avatar { font-size:1.9em; }
+        .result-name { font-size:1.05em; font-weight:600; color:var(--text-bright); }
+        .result-badges { font-size:0.95em; margin-top:3px; }
+        .result-pts { font-family:'Cinzel',serif; font-size:1.3em; font-weight:700; color:var(--amber-light); min-width:70px; text-align:right; }
 
         /* HALL */
         .hall-card {
@@ -309,12 +321,12 @@
             border-left:3px solid var(--amber-dim); border-radius:0 4px 4px 0;
             margin-bottom:10px; letter-spacing:0.04em;
         }
-        .rules-table { width:100%; border-collapse:collapse; margin-bottom:14px; font-size:0.97em; }
+        .rules-table { width:100%; border-collapse:collapse; margin-bottom:14px; font-size:1em; }
         .rules-table th {
-            font-family:'Cinzel',serif; font-size:0.82em; color:var(--amber);
-            text-align:left; padding:7px 9px; border-bottom:1px solid var(--amber-dim); letter-spacing:0.05em;
+            font-family:'Cinzel',serif; font-size:0.88em; color:var(--amber);
+            text-align:left; padding:9px 10px; border-bottom:1px solid var(--amber-dim); letter-spacing:0.05em;
         }
-        .rules-table td { padding:9px 9px; border-bottom:1px solid rgba(255,255,255,0.04); vertical-align:middle; }
+        .rules-table td { padding:11px 10px; border-bottom:1px solid rgba(255,255,255,0.04); vertical-align:middle; }
         .rules-table tr:last-child td { border-bottom:none; }
         .pts-pos   { color:#4A8C5C; font-family:'Cinzel',serif; font-weight:700; font-size:1.05em; }
         .pts-neg   { color:#8C4040; font-family:'Cinzel',serif; font-weight:700; font-size:1.05em; }
@@ -334,15 +346,15 @@
             box-shadow:0 -4px 30px rgba(0,0,0,0.9); z-index:100;
         }
         .nav-btn {
-            flex:1; background:transparent; border:none; color:#2A2632;
-            padding:7px 4px; cursor:pointer;
-            display:flex; flex-direction:column; align-items:center; gap:3px;
-            font-family:'Cinzel',serif; font-size:0.65em; font-weight:700;
-            letter-spacing:0.04em; transition:color 0.2s; min-height:54px;
+            flex:1; background:transparent; border:none; color:#3A3648;
+            padding:8px 4px 10px; cursor:pointer;
+            display:flex; flex-direction:column; align-items:center; gap:4px;
+            font-family:'Cinzel',serif; font-size:0.72em; font-weight:700;
+            letter-spacing:0.04em; transition:color 0.2s; min-height:62px;
         }
         .nav-btn.active { color:var(--amber); }
         .nav-btn.active .nav-icon { filter:drop-shadow(0 0 5px rgba(200,134,10,0.5)); }
-        .nav-icon { font-size:1.6em; }
+        .nav-icon { font-size:1.8em; }
 
         .tab-content { display:none; }
         .tab-content.active { display:block; animation:fadeUp 0.3s ease; }
@@ -375,8 +387,9 @@
 <div class="header">
     <div class="header-title">⚔️ Guerra dos Reinos e Alianças ⚔️</div>
     <div class="header-badges">
-        <span class="header-badge badge-bastardos">🗡️ Os Bastardos</span>
+        <span class="header-badge badge-bastardos">🗡️ Bastardos</span>
         <span class="header-badge badge-anel">💍 Sociedade do Anel</span>
+        <span class="header-badge badge-northclaw">🦅 North Claw</span>
     </div>
     <div class="header-sub">Temporada 2026 · Rodada <span id="current-round">—</span> de 38 · Pontos medievais a partir da R6</div>
 </div>
@@ -448,8 +461,8 @@ const LORDS = [
     { name:'Icebergteam',     house:'Forja Polar',          avatar:'❄️',  color:'#00CED1', alliance:'anel'      },
     { name:'Sons of Númenor', house:'Herdeiros de Elendil',  avatar:'🛡️',  color:'#4169E1', alliance:'bastardos' },
     { name:'Ironverdict',     house:'Forja da Justiça',      avatar:'🗡️',  color:'#8a8a8a', alliance:'bastardos' },
-    { name:'CEEC',            house:'Mestre das Espadas',    avatar:'⚔️',  color:'#8B0000', alliance:'anel'      },
-    { name:'Otopatamá',       house:'Samurais Guerreiros',   avatar:'🤖',  color:'#1E90FF', alliance:'anel'      },
+    { name:'CEEC',            house:'Mestre das Espadas',    avatar:'⚔️',  color:'#8B0000', alliance:'northclaw' },
+    { name:'Otopatamá',       house:'Samurais Guerreiros',   avatar:'🤖',  color:'#1E90FF', alliance:'northclaw' },
     { name:'Andorinha Jr',    house:'Jovem Veloz',           avatar:'🐦',  color:'#FF6347', alliance:'anel'      },
     { name:'Andorinha',       house:'Senhores do Voo',       avatar:'🦅',  color:'#DC143C', alliance:'anel'      },
     { name:'Varelitas',       house:'Guardas da Colina',     avatar:'🦊',  color:'#228B22', alliance:'bastardos' },
@@ -457,8 +470,9 @@ const LORDS = [
 ];
 
 const ALLIANCES = {
-    bastardos: { label:'Os Bastardos',      icon:'🗡️', members:'Varelitas · Lobonegro · Sons of Númenor · Ironverdict' },
-    anel:      { label:'Sociedade do Anel', icon:'💍', members:'Icebergteam · CEEC · Otopatamá · Andorinha Jr · Andorinha' },
+    bastardos: { label:'Bastardos',         icon:'🗡️', members:'Varelitas · Lobonegro · Sons of Númenor · Ironverdict' },
+    anel:      { label:'Sociedade do Anel', icon:'💍', members:'Icebergteam · Andorinha Jr · Andorinha' },
+    northclaw: { label:'North Claw',        icon:'🦅', members:'CEEC · Otopatamá' },
 };
 
 // ════════════════════════════════════════════════
@@ -684,7 +698,7 @@ function processAll(BATTLES) {
 // ════════════════════════════════════════════════
 function allianceTag(lord) {
     const al = ALLIANCES[lord.alliance];
-    const cls = lord.alliance==='bastardos'?'tag-bastardos':'tag-anel';
+    const cls = `tag-${lord.alliance}`;
     return `<span class="alliance-tag ${cls}">${al.icon} ${al.label}</span>`;
 }
 
@@ -746,16 +760,16 @@ function renderRanking(data, lastRound) {
 // RENDER ALIANÇAS
 // ════════════════════════════════════════════════
 function renderAliancas(data) {
-    const bastardos = data.filter(l=>l.alliance==='bastardos');
-    const anel      = data.filter(l=>l.alliance==='anel');
-    const sumT = arr => arr.reduce((s,l)=>s+l.totalPoints,0);
-    const avgT = arr => sumT(arr) / arr.length;
-    const avgC = arr => arr.reduce((s,l)=>s+l.cartolaPoints,0) / arr.length;
-    const bPts = sumT(bastardos), aPts = sumT(anel);
-    const bAvg = avgT(bastardos), aAvg = avgT(anel);
-    const bAvgC = avgC(bastardos), aAvgC = avgC(anel);
-    const bWin = bPts > aPts, tie = bPts===aPts;
-    const bAvgWin = bAvg > aAvg;
+    const sumT = arr => arr.reduce((s,l) => s + l.totalPoints, 0);
+    const avgT = arr => sumT(arr) / (arr.length || 1);
+
+    const alStats = Object.keys(ALLIANCES).map(k => ({
+        key: k,
+        ...ALLIANCES[k],
+        membersData: data.filter(l => l.alliance === k),
+        total: sumT(data.filter(l => l.alliance === k)),
+        avg:   avgT(data.filter(l => l.alliance === k)),
+    })).sort((a,b) => b.total - a.total);
 
     const memberRow = (lord, alKey) => `
     <div class="member-row ${alKey}">
@@ -770,78 +784,45 @@ function renderAliancas(data) {
         </div>
     </div>`;
 
-    const scoreRow = (label, bVal, aVal, bColor, aColor, fmt) => {
-        const bWins = parseFloat(bVal) > parseFloat(aVal);
-        const tied  = parseFloat(bVal) === parseFloat(aVal);
-        return `
-        <div style="display:flex;align-items:center;gap:8px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);">
-            <div style="flex:1;text-align:center;">
-                <span style="font-family:Cinzel,serif;font-size:1.25em;font-weight:900;color:${bColor}">${fmt(bVal)}</span>
-                ${!tied&&bWins?'<span style="margin-left:6px;font-size:0.75em;color:'+bColor+'">▲</span>':''}
+    // Scoreboard ranking das 3 alianças
+    let html = `<div class="scoreboard"><div class="scoreboard-title">Classificação das Alianças</div>`;
+    alStats.forEach((al, i) => {
+        const color = `var(--${al.key}-light)`;
+        const medals = ['🥇','🥈','🥉'];
+        html += `
+        <div style="display:flex;align-items:center;gap:12px;padding:13px 6px;border-bottom:1px solid rgba(255,255,255,0.06);">
+            <div style="font-size:1.6em;flex-shrink:0">${medals[i]||''}</div>
+            <div style="font-size:1.5em;flex-shrink:0">${al.icon}</div>
+            <div style="flex:1;">
+                <div style="font-family:Cinzel,serif;font-size:1.05em;font-weight:900;color:${color};">${al.label}</div>
+                <div style="font-size:0.82em;color:var(--text-muted);margin-top:2px;">${al.members}</div>
             </div>
-            <div style="font-family:Cinzel,serif;font-size:0.75em;color:var(--text-muted);text-align:center;min-width:80px;letter-spacing:0.06em;text-transform:uppercase">${label}</div>
-            <div style="flex:1;text-align:center;">
-                <span style="font-family:Cinzel,serif;font-size:1.25em;font-weight:900;color:${aColor}">${fmt(aVal)}</span>
-                ${!tied&&!bWins?'<span style="margin-left:6px;font-size:0.75em;color:'+aColor+'">▲</span>':''}
+            <div style="text-align:right;flex-shrink:0;">
+                <div style="font-family:Cinzel,serif;font-size:1.5em;font-weight:900;color:${color};">${al.total.toFixed(0)}</div>
+                <div style="font-size:0.8em;color:var(--text-muted);">média ${al.avg.toFixed(1)}</div>
             </div>
         </div>`;
-    };
+    });
+    html += '</div>';
 
-    const bColor = 'var(--bastardos-light)', aColor = 'var(--anel-light)';
-
-    const html = `
-    <div class="scoreboard">
-        <div class="scoreboard-title">Placar Geral das Alianças</div>
-        <div class="scoreboard-row" style="margin-bottom:16px;">
-            <div class="scoreboard-side">
-                <div class="scoreboard-pts" style="color:${bColor}">${bPts.toFixed(0)}</div>
-                <div class="scoreboard-label" style="color:${bColor};">🗡️ Os Bastardos</div>
-                ${!tie&&bWin?`<div class="scoreboard-winner" style="background:rgba(90,100,112,0.2);border:1px solid var(--bastardos);color:${bColor};">👑 Liderando</div>`:''}
+    // Blocos por aliança
+    alStats.forEach(al => {
+        html += `
+        <div class="alliance-block">
+            <div class="alliance-header-card ${al.key}">
+                <div class="alliance-icon">${al.icon}</div>
+                <div class="alliance-info">
+                    <div class="alliance-name ${al.key}">${al.label}</div>
+                    <div class="alliance-subtitle">${al.members}</div>
+                </div>
+                <div>
+                    <div class="alliance-total ${al.key}">${al.total.toFixed(0)}</div>
+                    <div style="font-size:0.78em;color:var(--text-muted);text-align:right;font-style:italic;">média ${al.avg.toFixed(1)}</div>
+                </div>
             </div>
-            <div class="scoreboard-vs">VS</div>
-            <div class="scoreboard-side">
-                <div class="scoreboard-pts" style="color:${aColor}">${aPts.toFixed(0)}</div>
-                <div class="scoreboard-label" style="color:${aColor};">💍 Soc. do Anel</div>
-                ${!tie&&!bWin?`<div class="scoreboard-winner" style="background:rgba(28,78,58,0.2);border:1px solid var(--anel);color:${aColor};">👑 Liderando</div>`:''}
-            </div>
-        </div>
-        ${scoreRow('Total', bPts, aPts, bColor, aColor, v => parseFloat(v).toFixed(0))}
-        ${scoreRow('Média / membro', bAvg, aAvg, bColor, aColor, v => parseFloat(v).toFixed(1))}
-
-        ${tie?'<div style="margin-top:10px;text-align:center;font-family:Cinzel,serif;color:var(--amber);font-size:0.9em;">⚖️ Empate!</div>':''}
-    </div>
-
-    <div class="alliance-block">
-        <div class="alliance-header-card bastardos">
-            <div class="alliance-icon">🗡️</div>
-            <div class="alliance-info">
-                <div class="alliance-name bastardos">Os Bastardos</div>
-                <div class="alliance-subtitle">${ALLIANCES.bastardos.members}</div>
-            </div>
-            <div>
-                <div class="alliance-total bastardos">${bPts.toFixed(0)}</div>
-                <div style="font-size:0.75em;color:var(--text-muted);text-align:right;font-style:italic;">média ${bAvg.toFixed(1)}</div>
-            </div>
-        </div>
-        ${bastardos.sort((a,b)=>b.totalPoints-a.totalPoints).map(l=>memberRow(l,'bastardos')).join('')}
-    </div>
-
-    <div class="alliance-vs-divider">— VS —</div>
-
-    <div class="alliance-block">
-        <div class="alliance-header-card anel">
-            <div class="alliance-icon">💍</div>
-            <div class="alliance-info">
-                <div class="alliance-name anel">Sociedade do Anel</div>
-                <div class="alliance-subtitle">${ALLIANCES.anel.members}</div>
-            </div>
-            <div>
-                <div class="alliance-total anel">${aPts.toFixed(0)}</div>
-                <div style="font-size:0.75em;color:var(--text-muted);text-align:right;font-style:italic;">média ${aAvg.toFixed(1)}</div>
-            </div>
-        </div>
-        ${anel.sort((a,b)=>b.totalPoints-a.totalPoints).map(l=>memberRow(l,'anel')).join('')}
-    </div>`;
+            ${[...al.membersData].sort((a,b) => b.totalPoints - a.totalPoints).map(l => memberRow(l, al.key)).join('')}
+        </div>`;
+    });
 
     document.getElementById('aliancas-content').innerHTML = html;
 }
@@ -1005,8 +986,9 @@ function renderRules() {
         <div class="rules-group-title">🤝 ALIANÇAS</div>
         <table class="rules-table">
             <tr><th>Aliança</th><th>Membros</th></tr>
-            <tr><td style="color:#ff8a80;font-weight:700">🗡️ Os Bastardos</td><td>Varelitas, Lobonegro, Sons of Númenor, Ironverdict</td></tr>
-            <tr><td style="color:#80d8ff;font-weight:700">💍 Soc. do Anel</td><td>Icebergteam, CEEC, Otopatamá, Andorinha Jr, Andorinha</td></tr>
+            <tr><td style="color:#B0BEC5;font-weight:700">🗡️ Bastardos</td><td>Varelitas, Lobonegro, Sons of Númenor, Ironverdict</td></tr>
+            <tr><td style="color:#2E7A58;font-weight:700">💍 Soc. do Anel</td><td>Icebergteam, Andorinha Jr, Andorinha</td></tr>
+            <tr><td style="color:#C084FC;font-weight:700">🦅 North Claw</td><td>CEEC, Otopatamá</td></tr>
         </table>
         <div class="rule-note">A pontuação da aliança é a soma dos pontos totais (Cartola + Medieval) de todos os membros.</div>
     </div>
