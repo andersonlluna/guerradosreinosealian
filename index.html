@@ -739,17 +739,22 @@ function renderRanking(data, lastRound) {
 // ════════════════════════════════════════════════
 // RENDER ALIANÇAS
 // ════════════════════════════════════════════════
-function renderAliancas(data) {
+function renderAliancas(data, rounds) {
     const sumT = arr => arr.reduce((s,l) => s + l.totalPoints, 0);
     const avgT = arr => sumT(arr) / (arr.length || 1);
+    const sumC = arr => arr.reduce((s,l) => s + l.cartolaPoints, 0);
 
-    const alStats = Object.keys(ALLIANCES).map(k => ({
-        key: k,
-        ...ALLIANCES[k],
-        membersData: data.filter(l => l.alliance === k),
-        total: sumT(data.filter(l => l.alliance === k)),
-        avg:   avgT(data.filter(l => l.alliance === k)),
-    })).sort((a,b) => b.total - a.total);
+    const alStats = Object.keys(ALLIANCES).map(k => {
+        const members = data.filter(l => l.alliance === k);
+        return {
+            key: k,
+            ...ALLIANCES[k],
+            membersData: members,
+            total: sumT(members),
+            avg:   avgT(members),
+            cartolaAvg: (members.length > 0 && rounds > 0) ? sumC(members) / (members.length * rounds) : 0,
+        };
+    }).sort((a,b) => b.total - a.total);
 
     const memberRow = (lord, alKey) => `
     <div class="member-row ${alKey}">
@@ -779,7 +784,8 @@ function renderAliancas(data) {
             </div>
             <div style="text-align:right;flex-shrink:0;">
                 <div style="font-family:Cinzel,serif;font-size:1.5em;font-weight:900;color:${color};">${al.total.toFixed(0)}</div>
-                <div style="font-size:0.8em;color:var(--text-muted);">média ${al.avg.toFixed(1)}</div>
+                <div style="font-size:0.95em;font-weight:700;color:${color};margin-top:3px;">⚔️ ${al.avg.toFixed(1)} <span style="font-size:0.75em;font-weight:400;color:var(--text-muted);">méd/total</span></div>
+                <div style="font-size:0.85em;color:var(--text-muted);margin-top:2px;">📊 ${al.cartolaAvg.toFixed(1)} <span style="font-size:0.85em;">méd/rod</span></div>
             </div>
         </div>`;
     });
@@ -797,7 +803,8 @@ function renderAliancas(data) {
                 </div>
                 <div>
                     <div class="alliance-total ${al.key}">${al.total.toFixed(0)}</div>
-                    <div style="font-size:0.78em;color:var(--text-muted);text-align:right;font-style:italic;">média ${al.avg.toFixed(1)}</div>
+                    <div style="font-size:0.95em;font-weight:700;color:var(--${al.key}-light);text-align:right;margin-top:4px;">⚔️ ${al.avg.toFixed(1)}</div>
+                    <div style="font-size:0.82em;color:var(--text-muted);text-align:right;margin-top:2px;">📊 ${al.cartolaAvg.toFixed(1)}/rod</div>
                 </div>
             </div>
             ${[...al.membersData].sort((a,b) => b.totalPoints - a.totalPoints).map(l => memberRow(l, al.key)).join('')}
@@ -1033,7 +1040,7 @@ async function init() {
         const processedData = processAll(BATTLES);
 
         renderRanking(processedData, lastRound);
-        renderAliancas(processedData);
+        renderAliancas(processedData, lastRound);
         renderMedieval(processedData, lastRound);
         renderBattles(BATTLES, processedData);
         renderAchievements(processedData);
