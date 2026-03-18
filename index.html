@@ -756,7 +756,6 @@ function renderRanking(data, lastRound) {
 function renderAliancas(data, rounds) {
     const sumT = arr => arr.reduce((s,l) => s + l.totalPoints, 0);
     const avgT = arr => sumT(arr) / (arr.length || 1);
-    const sumC = arr => arr.reduce((s,l) => s + l.cartolaPoints, 0);
 
     const alStats = Object.keys(ALLIANCES).map(k => {
         const members = data.filter(l => l.alliance === k);
@@ -766,7 +765,6 @@ function renderAliancas(data, rounds) {
             membersData: members,
             total: sumT(members),
             avg:   avgT(members),
-            cartolaAvg: (members.length > 0 && rounds > 0) ? sumC(members) / (members.length * rounds) : 0,
         };
     }).sort((a,b) => b.total - a.total);
 
@@ -797,15 +795,9 @@ function renderAliancas(data, rounds) {
             </div>
             <div style="text-align:right;flex-shrink:0;">
                 <div style="font-family:Cinzel,serif;font-size:1.5em;font-weight:900;color:${color};">${al.total.toFixed(0)}</div>
-                <div style="display:flex;gap:5px;margin-top:6px;justify-content:flex-end;">
-                    <div style="background:rgba(255,255,255,0.05);border:1px solid ${color.replace('var(--','rgba(').replace('-light)','')},0.3);border-radius:4px;padding:4px 7px;text-align:center;">
-                        <div style="font-size:0.65em;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:1px;">méd total</div>
-                        <div style="font-family:Cinzel,serif;font-size:0.95em;font-weight:700;color:${color};">⚔️ ${al.avg.toFixed(1)}</div>
-                    </div>
-                    <div style="background:rgba(200,134,10,0.07);border:1px solid rgba(200,134,10,0.25);border-radius:4px;padding:4px 7px;text-align:center;">
-                        <div style="font-size:0.65em;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:1px;">méd cartola</div>
-                        <div style="font-family:Cinzel,serif;font-size:0.95em;font-weight:700;color:var(--amber-light);">📊 ${al.cartolaAvg.toFixed(1)}</div>
-                    </div>
+                <div style="margin-top:5px;background:rgba(255,255,255,0.06);border:1px solid ${color.replace('var(--','rgba(').replace('-light)','')},0.4);border-radius:6px;padding:5px 10px;text-align:center;">
+                    <div style="font-size:0.62em;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:2px;">média</div>
+                    <div style="font-family:Cinzel,serif;font-size:1.15em;font-weight:900;color:${color};">⚔️ ${al.avg.toFixed(1)}</div>
                 </div>
             </div>
         </div>`;
@@ -824,15 +816,9 @@ function renderAliancas(data, rounds) {
                 </div>
                 <div style="text-align:right;">
                     <div class="alliance-total ${al.key}">${al.total.toFixed(0)}</div>
-                    <div style="display:flex;gap:5px;margin-top:6px;justify-content:flex-end;">
-                        <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);border-radius:4px;padding:4px 8px;text-align:center;">
-                            <div style="font-size:0.62em;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:1px;">méd total</div>
-                            <div style="font-family:Cinzel,serif;font-size:1em;font-weight:700;color:var(--${al.key}-light);">⚔️ ${al.avg.toFixed(1)}</div>
-                        </div>
-                        <div style="background:rgba(200,134,10,0.07);border:1px solid rgba(200,134,10,0.25);border-radius:4px;padding:4px 8px;text-align:center;">
-                            <div style="font-size:0.62em;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:1px;">méd cartola</div>
-                            <div style="font-family:Cinzel,serif;font-size:1em;font-weight:700;color:var(--amber-light);">📊 ${al.cartolaAvg.toFixed(1)}</div>
-                        </div>
+                    <div style="margin-top:6px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.18);border-radius:6px;padding:5px 12px;text-align:center;">
+                        <div style="font-size:0.6em;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:2px;">média</div>
+                        <div style="font-family:Cinzel,serif;font-size:1.2em;font-weight:900;color:var(--${al.key}-light);">⚔️ ${al.avg.toFixed(1)}</div>
                     </div>
                 </div>
             </div>
