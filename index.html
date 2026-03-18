@@ -570,7 +570,10 @@ function processAll(BATTLES) {
     const ld = LORDS.map(l => ({...l,
         cartolaPoints:0, medievalPoints:0, totalPoints:0,
         roundsPlayed:0,
-        mvp:0, podio:0, mitada:0, recuperacao:0, massacre:0, lanterna:0, bonusG2:0,
+        // Contadores exibidos na UI (todas as rodadas desde R1)
+        mvp:0, podio:0, mitada:0, recuperacao:0, massacre:0, lanterna:0,
+        // Contadores usados no cálculo de pontos medievais e títulos (só R6+)
+        mvpCalc:0, podioCalc:0, mitadaCalc:0, recuperacaoCalc:0, massacreCalc:0, lanternaCalc:0, bonusG2:0,
         currentTitle:'📰 Escudeiro Sem Nome',
     }));
 
@@ -622,24 +625,28 @@ function processAll(BATTLES) {
         const posB  = {}; rankB.forEach((n,i) => posB[n]=i);
         const posA  = {}; rankA.forEach((n,i) => posA[n]=i);
 
+        const act = battle.medievalActive;
         sorted.forEach((r, pos) => {
             const lord = find(r.name); if (!lord) return;
 
             // MVP
-            if (pos===0 && r.points>0) lord.mvp++;
+            if (pos===0 && r.points>0) { lord.mvp++; if(act) lord.mvpCalc++; }
             // Pódio
-            if (pos===1||pos===2) lord.podio++;
-            // Mitada + G2 bonus
+            if (pos===1||pos===2) { lord.podio++; if(act) lord.podioCalc++; }
+            // Mitada + G2 bonus (bonusG2 só conta em rodadas ativas)
             if (r.points>=80) {
                 lord.mitada++;
-                if      (r.points>=110) lord.bonusG2+=14;
-                else if (r.points>=100) lord.bonusG2+=8;
-                else if (r.points>=90)  lord.bonusG2+=4;
+                if (act) {
+                    lord.mitadaCalc++;
+                    if      (r.points>=110) lord.bonusG2+=14;
+                    else if (r.points>=100) lord.bonusG2+=8;
+                    else if (r.points>=90)  lord.bonusG2+=4;
+                }
             }
             // Lanterna
-            if (pos===sorted.length-1 && r.points>0) lord.lanterna++;
-            // Recuperação (vs previous ACTIVE round)
-            if (idx>0 && (prev[r.name]||0)>0 && (r.points - prev[r.name])>=50) lord.recuperacao++;
+            if (pos===sorted.length-1 && r.points>0) { lord.lanterna++; if(act) lord.lanternaCalc++; }
+            // Recuperação
+            if (idx>0 && (prev[r.name]||0)>0 && (r.points - prev[r.name])>=50) { lord.recuperacao++; if(act) lord.recuperacaoCalc++; }
             // Massacre
             if (idx>0 && (posB[r.name]??999)>(posA[r.name]??999)) {
                 let hm = false;
@@ -648,7 +655,7 @@ function processAll(BATTLES) {
                     if ((posB[r.name]??999)>(posB[o.name]??999) && (posA[r.name]??999)<(posA[o.name]??999))
                         if (((afterSnap[r.name]||0)-(afterSnap[o.name]||0))>=10) hm=true;
                 });
-                if (hm) lord.massacre++;
+                if (hm) { lord.massacre++; if(act) lord.massacreCalc++; }
             }
         });
         battle.results.forEach(r => prev[r.name]=r.points);
@@ -656,19 +663,20 @@ function processAll(BATTLES) {
 
     // ── Finalize: medieval points + titles
     ld.forEach(lord => {
+        // Pontos medievais e títulos calculados apenas com conquistas da R6+
         lord.medievalPoints = lastRound < MEDIEVAL_START ? 0 :
             calcMedieval({
-                mvp:lord.mvp, podio:lord.podio, mitada:lord.mitada,
-                recuperacao:lord.recuperacao, massacre:lord.massacre, lanterna:lord.lanterna
+                mvp:lord.mvpCalc, podio:lord.podioCalc, mitada:lord.mitadaCalc,
+                recuperacao:lord.recuperacaoCalc, massacre:lord.massacreCalc, lanterna:lord.lanternaCalc
             }) + lord.bonusG2;
 
         lord.totalPoints = lord.cartolaPoints + lord.medievalPoints;
 
-        // Títulos só existem a partir de MEDIEVAL_START
+        // Títulos só existem a partir de MEDIEVAL_START, baseados em conquistas R6+
         lord.currentTitle = lastRound < MEDIEVAL_START ? '📰 Escudeiro Sem Nome' :
-            getTitle('mvp',lord.mvp)||getTitle('mitada',lord.mitada)||
-            getTitle('recuperacao',lord.recuperacao)||getTitle('massacre',lord.massacre)||
-            getTitle('podio',lord.podio)||getTitle('lanterna',lord.lanterna)||'📰 Escudeiro Sem Nome';
+            getTitle('mvp',lord.mvpCalc)||getTitle('mitada',lord.mitadaCalc)||
+            getTitle('recuperacao',lord.recuperacaoCalc)||getTitle('massacre',lord.massacreCalc)||
+            getTitle('podio',lord.podioCalc)||getTitle('lanterna',lord.lanternaCalc)||'📰 Escudeiro Sem Nome';
     });
 
     return ld.sort((a,b)=>b.totalPoints-a.totalPoints);
