@@ -585,8 +585,9 @@ function processAll(BATTLES) {
         });
     });
 
-    // ── Pass 2: compute conquests and medieval points using ACTIVE rounds only
-    const activeRounds = BATTLES.filter(b => b.medievalActive);
+    // ── Pass 2: compute conquests using ALL rounds (contadores contam desde R1)
+    // Pontos medievais e títulos só se ativam a partir de MEDIEVAL_START (linha de finalização abaixo)
+    const activeRounds = [...BATTLES];
     const lastRound = BATTLES.length ? Math.max(...BATTLES.map(b=>b.week)) : 0;
 
     // Cumulative acum per round for Massacre ranking comparison:
@@ -597,7 +598,7 @@ function processAll(BATTLES) {
         acumByRound[battle.week] = {...fullAcum};
     });
 
-    let prev = {}; // previous ACTIVE round scores per lord (for Recuperação)
+    let prev = {}; // previous round scores per lord (for Recuperação)
 
     activeRounds.forEach((battle, idx) => {
         const sorted = [...battle.results].sort((a,b)=>b.points-a.points);
@@ -770,7 +771,6 @@ function renderAliancas(data, rounds) {
         </div>
         <div class="member-pts">
             <div class="member-pts-main">${lord.totalPoints.toFixed(0)}</div>
-            <div class="member-pts-sub">📊 ${lord.cartolaPoints.toFixed(2)}</div>
         </div>
     </div>`;
 
