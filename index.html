@@ -719,6 +719,11 @@ function renderRanking(data, lastRound) {
                     <span class="pts-cartola">📊 ${lord.cartolaPoints.toFixed(2)}</span>
                     ${medHtml}
                 </div>
+                <div style="margin-top:8px;padding:6px 10px;background:rgba(200,134,10,0.06);border:1px solid rgba(200,134,10,0.15);border-radius:4px;display:flex;align-items:center;justify-content:center;gap:8px;">
+                    <span style="font-size:0.82em;color:var(--text-muted);">Média Cartola</span>
+                    <span style="font-family:Cinzel,serif;font-size:1.1em;font-weight:700;color:var(--amber-light);">${lord.roundsPlayed > 0 ? (lord.cartolaPoints / lord.roundsPlayed).toFixed(1) : '—'}</span>
+                    <span style="font-size:0.78em;color:var(--text-muted);">pts/rod</span>
+                </div>
             </div>
             <div class="lord-details" id="details-r${i}">
                 <div class="stats-grid">
@@ -784,8 +789,16 @@ function renderAliancas(data, rounds) {
             </div>
             <div style="text-align:right;flex-shrink:0;">
                 <div style="font-family:Cinzel,serif;font-size:1.5em;font-weight:900;color:${color};">${al.total.toFixed(0)}</div>
-                <div style="font-size:0.95em;font-weight:700;color:${color};margin-top:3px;">⚔️ ${al.avg.toFixed(1)} <span style="font-size:0.75em;font-weight:400;color:var(--text-muted);">méd/total</span></div>
-                <div style="font-size:0.85em;color:var(--text-muted);margin-top:2px;">📊 ${al.cartolaAvg.toFixed(1)} <span style="font-size:0.85em;">méd/rod</span></div>
+                <div style="display:flex;gap:5px;margin-top:6px;justify-content:flex-end;">
+                    <div style="background:rgba(255,255,255,0.05);border:1px solid ${color.replace('var(--','rgba(').replace('-light)','')},0.3);border-radius:4px;padding:4px 7px;text-align:center;">
+                        <div style="font-size:0.65em;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:1px;">méd total</div>
+                        <div style="font-family:Cinzel,serif;font-size:0.95em;font-weight:700;color:${color};">⚔️ ${al.avg.toFixed(1)}</div>
+                    </div>
+                    <div style="background:rgba(200,134,10,0.07);border:1px solid rgba(200,134,10,0.25);border-radius:4px;padding:4px 7px;text-align:center;">
+                        <div style="font-size:0.65em;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:1px;">méd cartola</div>
+                        <div style="font-family:Cinzel,serif;font-size:0.95em;font-weight:700;color:var(--amber-light);">📊 ${al.cartolaAvg.toFixed(1)}</div>
+                    </div>
+                </div>
             </div>
         </div>`;
     });
@@ -801,10 +814,18 @@ function renderAliancas(data, rounds) {
                     <div class="alliance-name ${al.key}">${al.label}</div>
                     <div class="alliance-subtitle">${al.members}</div>
                 </div>
-                <div>
+                <div style="text-align:right;">
                     <div class="alliance-total ${al.key}">${al.total.toFixed(0)}</div>
-                    <div style="font-size:0.95em;font-weight:700;color:var(--${al.key}-light);text-align:right;margin-top:4px;">⚔️ ${al.avg.toFixed(1)}</div>
-                    <div style="font-size:0.82em;color:var(--text-muted);text-align:right;margin-top:2px;">📊 ${al.cartolaAvg.toFixed(1)}/rod</div>
+                    <div style="display:flex;gap:5px;margin-top:6px;justify-content:flex-end;">
+                        <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);border-radius:4px;padding:4px 8px;text-align:center;">
+                            <div style="font-size:0.62em;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:1px;">méd total</div>
+                            <div style="font-family:Cinzel,serif;font-size:1em;font-weight:700;color:var(--${al.key}-light);">⚔️ ${al.avg.toFixed(1)}</div>
+                        </div>
+                        <div style="background:rgba(200,134,10,0.07);border:1px solid rgba(200,134,10,0.25);border-radius:4px;padding:4px 8px;text-align:center;">
+                            <div style="font-size:0.62em;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:1px;">méd cartola</div>
+                            <div style="font-family:Cinzel,serif;font-size:1em;font-weight:700;color:var(--amber-light);">📊 ${al.cartolaAvg.toFixed(1)}</div>
+                        </div>
+                    </div>
                 </div>
             </div>
             ${[...al.membersData].sort((a,b) => b.totalPoints - a.totalPoints).map(l => memberRow(l, al.key)).join('')}
