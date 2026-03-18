@@ -733,7 +733,7 @@ function renderRanking(data, lastRound) {
                     <div class="stat-item"><div class="stat-label">🥇 Pódio</div><div class="stat-value">${lord.podio}x</div></div>
                     <div class="stat-item"><div class="stat-label">📈 Recup.</div><div class="stat-value">${lord.recuperacao}x</div></div>
                     <div class="stat-item"><div class="stat-label">🗡️ Massacre</div><div class="stat-value">${lord.massacre}x</div></div>
-                    <div class="stat-item"><div class="stat-label">📦 Lanterna</div><div class="stat-value negative">${lord.lanterna}x</div></div>
+                    <div class="stat-item"><div class="stat-label">📦 Lanterna</div><div class="stat-value ${lord.lanterna > 0 ? 'negative' : ''}">${lord.lanterna}x</div></div>
                 </div>
             </div>
             <div class="expand-btn" id="indicator-r${i}">▼ Toque para ver detalhes</div>
@@ -885,7 +885,7 @@ function renderMedieval(data, lastRound) {
                     <div class="stat-item"><div class="stat-label">🥇 Pódio</div><div class="stat-value">${lord.podio}x</div></div>
                     <div class="stat-item"><div class="stat-label">📈 Recup.</div><div class="stat-value">${lord.recuperacao}x</div></div>
                     <div class="stat-item"><div class="stat-label">🗡️ Massacre</div><div class="stat-value">${lord.massacre}x</div></div>
-                    <div class="stat-item"><div class="stat-label">📦 Lanterna</div><div class="stat-value negative">${lord.lanterna}x</div></div>
+                    <div class="stat-item"><div class="stat-label">📦 Lanterna</div><div class="stat-value ${lord.lanterna > 0 ? 'negative' : ''}">${lord.lanterna}x</div></div>
                 </div>
             </div>`;
         }).join('');
