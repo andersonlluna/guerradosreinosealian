@@ -453,9 +453,9 @@ const LORDS = [
 ];
 
 const ALLIANCES = {
-    bastardos: { label:'Bastardos',         icon:'🗡️', members:'Varelitas · Lobonegro · Sons of Númenor · Ironverdict' },
-    anel:      { label:'Sociedade do Anel', icon:'💍', members:'Icebergteam · Andorinha Jr · Andorinha' },
-    northclaw: { label:'North Claw',        icon:'🦅', members:'CEEC · Otopatamá' },
+    bastardos: { label:'Bastardos',         icon:'🗡️', members:'Varelitas · Lobonegro · Sons of Númenor · Ironverdict', rgb:'176,190,197' },
+    anel:      { label:'Sociedade do Anel', icon:'💍', members:'Icebergteam · Andorinha Jr · Andorinha',                 rgb:'46,122,88'   },
+    northclaw: { label:'North Claw',        icon:'🦅', members:'CEEC · Otopatamá',                                       rgb:'168,85,247'  },
 };
 
 // ════════════════════════════════════════════════
@@ -570,7 +570,10 @@ function processAll(BATTLES) {
     const ld = LORDS.map(l => ({...l,
         cartolaPoints:0, medievalPoints:0, totalPoints:0,
         roundsPlayed:0,
-        mvp:0, podio:0, mitada:0, recuperacao:0, massacre:0, lanterna:0, bonusG2:0,
+        // Contadores exibidos na UI (todas as rodadas desde R1)
+        mvp:0, podio:0, mitada:0, recuperacao:0, massacre:0, lanterna:0,
+        // Contadores usados no cálculo de pontos medievais e títulos (só R6+)
+        mvpCalc:0, podioCalc:0, mitadaCalc:0, recuperacaoCalc:0, massacreCalc:0, lanternaCalc:0, bonusG2:0,
         currentTitle:'📰 Escudeiro Sem Nome',
     }));
 
@@ -622,24 +625,28 @@ function processAll(BATTLES) {
         const posB  = {}; rankB.forEach((n,i) => posB[n]=i);
         const posA  = {}; rankA.forEach((n,i) => posA[n]=i);
 
+        const act = battle.medievalActive;
         sorted.forEach((r, pos) => {
             const lord = find(r.name); if (!lord) return;
 
             // MVP
-            if (pos===0 && r.points>0) lord.mvp++;
+            if (pos===0 && r.points>0) { lord.mvp++; if(act) lord.mvpCalc++; }
             // Pódio
-            if (pos===1||pos===2) lord.podio++;
-            // Mitada + G2 bonus
+            if (pos===1||pos===2) { lord.podio++; if(act) lord.podioCalc++; }
+            // Mitada + G2 bonus (bonusG2 só conta em rodadas ativas)
             if (r.points>=80) {
                 lord.mitada++;
-                if      (r.points>=110) lord.bonusG2+=14;
-                else if (r.points>=100) lord.bonusG2+=8;
-                else if (r.points>=90)  lord.bonusG2+=4;
+                if (act) {
+                    lord.mitadaCalc++;
+                    if      (r.points>=110) lord.bonusG2+=14;
+                    else if (r.points>=100) lord.bonusG2+=8;
+                    else if (r.points>=90)  lord.bonusG2+=4;
+                }
             }
             // Lanterna
-            if (pos===sorted.length-1 && r.points>0) lord.lanterna++;
-            // Recuperação (vs previous ACTIVE round)
-            if (idx>0 && (prev[r.name]||0)>0 && (r.points - prev[r.name])>=50) lord.recuperacao++;
+            if (pos===sorted.length-1 && r.points>0) { lord.lanterna++; if(act) lord.lanternaCalc++; }
+            // Recuperação
+            if (idx>0 && (prev[r.name]||0)>0 && (r.points - prev[r.name])>=50) { lord.recuperacao++; if(act) lord.recuperacaoCalc++; }
             // Massacre
             if (idx>0 && (posB[r.name]??999)>(posA[r.name]??999)) {
                 let hm = false;
@@ -648,7 +655,7 @@ function processAll(BATTLES) {
                     if ((posB[r.name]??999)>(posB[o.name]??999) && (posA[r.name]??999)<(posA[o.name]??999))
                         if (((afterSnap[r.name]||0)-(afterSnap[o.name]||0))>=10) hm=true;
                 });
-                if (hm) lord.massacre++;
+                if (hm) { lord.massacre++; if(act) lord.massacreCalc++; }
             }
         });
         battle.results.forEach(r => prev[r.name]=r.points);
@@ -656,19 +663,20 @@ function processAll(BATTLES) {
 
     // ── Finalize: medieval points + titles
     ld.forEach(lord => {
+        // Pontos medievais e títulos calculados apenas com conquistas da R6+
         lord.medievalPoints = lastRound < MEDIEVAL_START ? 0 :
             calcMedieval({
-                mvp:lord.mvp, podio:lord.podio, mitada:lord.mitada,
-                recuperacao:lord.recuperacao, massacre:lord.massacre, lanterna:lord.lanterna
+                mvp:lord.mvpCalc, podio:lord.podioCalc, mitada:lord.mitadaCalc,
+                recuperacao:lord.recuperacaoCalc, massacre:lord.massacreCalc, lanterna:lord.lanternaCalc
             }) + lord.bonusG2;
 
         lord.totalPoints = lord.cartolaPoints + lord.medievalPoints;
 
-        // Títulos só existem a partir de MEDIEVAL_START
+        // Títulos só existem a partir de MEDIEVAL_START, baseados em conquistas R6+
         lord.currentTitle = lastRound < MEDIEVAL_START ? '📰 Escudeiro Sem Nome' :
-            getTitle('mvp',lord.mvp)||getTitle('mitada',lord.mitada)||
-            getTitle('recuperacao',lord.recuperacao)||getTitle('massacre',lord.massacre)||
-            getTitle('podio',lord.podio)||getTitle('lanterna',lord.lanterna)||'📰 Escudeiro Sem Nome';
+            getTitle('mvp',lord.mvpCalc)||getTitle('mitada',lord.mitadaCalc)||
+            getTitle('recuperacao',lord.recuperacaoCalc)||getTitle('massacre',lord.massacreCalc)||
+            getTitle('podio',lord.podioCalc)||getTitle('lanterna',lord.lanternaCalc)||'📰 Escudeiro Sem Nome';
     });
 
     return ld.sort((a,b)=>b.totalPoints-a.totalPoints);
@@ -733,7 +741,7 @@ function renderRanking(data, lastRound) {
                     <div class="stat-item"><div class="stat-label">🥇 Pódio</div><div class="stat-value">${lord.podio}x</div></div>
                     <div class="stat-item"><div class="stat-label">📈 Recup.</div><div class="stat-value">${lord.recuperacao}x</div></div>
                     <div class="stat-item"><div class="stat-label">🗡️ Massacre</div><div class="stat-value">${lord.massacre}x</div></div>
-                    <div class="stat-item"><div class="stat-label">📦 Lanterna</div><div class="stat-value negative">${lord.lanterna}x</div></div>
+                    <div class="stat-item"><div class="stat-label">📦 Lanterna</div><div class="stat-value ${lord.lanterna > 0 ? 'negative' : ''}">${lord.lanterna}x</div></div>
                 </div>
             </div>
             <div class="expand-btn" id="indicator-r${i}">▼ Toque para ver detalhes</div>
@@ -745,10 +753,9 @@ function renderRanking(data, lastRound) {
 // ════════════════════════════════════════════════
 // RENDER ALIANÇAS
 // ════════════════════════════════════════════════
-function renderAliancas(data, rounds) {
+function renderAliancas(data) {
     const sumT = arr => arr.reduce((s,l) => s + l.totalPoints, 0);
     const avgT = arr => sumT(arr) / (arr.length || 1);
-    const sumC = arr => arr.reduce((s,l) => s + l.cartolaPoints, 0);
 
     const alStats = Object.keys(ALLIANCES).map(k => {
         const members = data.filter(l => l.alliance === k);
@@ -758,11 +765,13 @@ function renderAliancas(data, rounds) {
             membersData: members,
             total: sumT(members),
             avg:   avgT(members),
-            cartolaAvg: (members.length > 0 && rounds > 0) ? sumC(members) / (members.length * rounds) : 0,
         };
     }).sort((a,b) => b.total - a.total);
 
-    const memberRow = (lord, alKey) => `
+    const memberRow = (lord, alKey) => {
+        const medSign = lord.medievalPoints >= 0 ? '+' : '';
+        const medColor = lord.medievalPoints > 0 ? 'var(--copper-light)' : lord.medievalPoints < 0 ? '#8C3A3A' : 'var(--text-muted)';
+        return `
     <div class="member-row ${alKey}">
         <div class="member-avatar">${lord.avatar}</div>
         <div class="member-info">
@@ -771,8 +780,12 @@ function renderAliancas(data, rounds) {
         </div>
         <div class="member-pts">
             <div class="member-pts-main">${lord.totalPoints.toFixed(0)}</div>
+            <div class="member-pts-sub" style="margin-top:3px;">
+                <span style="color:#4A8C5C;">📊 ${lord.cartolaPoints.toFixed(0)}</span>
+                <span style="color:${medColor};margin-left:5px;">⚔️ ${medSign}${lord.medievalPoints}</span>
+            </div>
         </div>
-    </div>`;
+    </div>`;};
 
     // Scoreboard ranking das 3 alianças
     let html = `<div class="scoreboard"><div class="scoreboard-title">Classificação das Alianças</div>`;
@@ -789,15 +802,9 @@ function renderAliancas(data, rounds) {
             </div>
             <div style="text-align:right;flex-shrink:0;">
                 <div style="font-family:Cinzel,serif;font-size:1.5em;font-weight:900;color:${color};">${al.total.toFixed(0)}</div>
-                <div style="display:flex;gap:5px;margin-top:6px;justify-content:flex-end;">
-                    <div style="background:rgba(255,255,255,0.05);border:1px solid ${color.replace('var(--','rgba(').replace('-light)','')},0.3);border-radius:4px;padding:4px 7px;text-align:center;">
-                        <div style="font-size:0.65em;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:1px;">méd total</div>
-                        <div style="font-family:Cinzel,serif;font-size:0.95em;font-weight:700;color:${color};">⚔️ ${al.avg.toFixed(1)}</div>
-                    </div>
-                    <div style="background:rgba(200,134,10,0.07);border:1px solid rgba(200,134,10,0.25);border-radius:4px;padding:4px 7px;text-align:center;">
-                        <div style="font-size:0.65em;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:1px;">méd cartola</div>
-                        <div style="font-family:Cinzel,serif;font-size:0.95em;font-weight:700;color:var(--amber-light);">📊 ${al.cartolaAvg.toFixed(1)}</div>
-                    </div>
+                <div style="margin-top:5px;background:rgba(${al.rgb},0.06);border:1px solid rgba(${al.rgb},0.4);border-radius:6px;padding:5px 10px;text-align:center;">
+                    <div style="font-size:0.62em;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:2px;">média</div>
+                    <div style="font-family:Cinzel,serif;font-size:1.15em;font-weight:900;color:${color};">⚔️ ${al.avg.toFixed(1)}</div>
                 </div>
             </div>
         </div>`;
@@ -816,15 +823,9 @@ function renderAliancas(data, rounds) {
                 </div>
                 <div style="text-align:right;">
                     <div class="alliance-total ${al.key}">${al.total.toFixed(0)}</div>
-                    <div style="display:flex;gap:5px;margin-top:6px;justify-content:flex-end;">
-                        <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);border-radius:4px;padding:4px 8px;text-align:center;">
-                            <div style="font-size:0.62em;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:1px;">méd total</div>
-                            <div style="font-family:Cinzel,serif;font-size:1em;font-weight:700;color:var(--${al.key}-light);">⚔️ ${al.avg.toFixed(1)}</div>
-                        </div>
-                        <div style="background:rgba(200,134,10,0.07);border:1px solid rgba(200,134,10,0.25);border-radius:4px;padding:4px 8px;text-align:center;">
-                            <div style="font-size:0.62em;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:1px;">méd cartola</div>
-                            <div style="font-family:Cinzel,serif;font-size:1em;font-weight:700;color:var(--amber-light);">📊 ${al.cartolaAvg.toFixed(1)}</div>
-                        </div>
+                    <div style="margin-top:6px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.18);border-radius:6px;padding:5px 12px;text-align:center;">
+                        <div style="font-size:0.6em;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:2px;">média</div>
+                        <div style="font-family:Cinzel,serif;font-size:1.2em;font-weight:900;color:var(--${al.key}-light);">⚔️ ${al.avg.toFixed(1)}</div>
                     </div>
                 </div>
             </div>
@@ -885,7 +886,7 @@ function renderMedieval(data, lastRound) {
                     <div class="stat-item"><div class="stat-label">🥇 Pódio</div><div class="stat-value">${lord.podio}x</div></div>
                     <div class="stat-item"><div class="stat-label">📈 Recup.</div><div class="stat-value">${lord.recuperacao}x</div></div>
                     <div class="stat-item"><div class="stat-label">🗡️ Massacre</div><div class="stat-value">${lord.massacre}x</div></div>
-                    <div class="stat-item"><div class="stat-label">📦 Lanterna</div><div class="stat-value negative">${lord.lanterna}x</div></div>
+                    <div class="stat-item"><div class="stat-label">📦 Lanterna</div><div class="stat-value ${lord.lanterna > 0 ? 'negative' : ''}">${lord.lanterna}x</div></div>
                 </div>
             </div>`;
         }).join('');
@@ -940,7 +941,7 @@ function renderBattles(BATTLES, data) {
 // ════════════════════════════════════════════════
 function renderAchievements(data) {
     const top = (key) => [...data].sort((a,b)=>b[key]-a[key])[0];
-    const mvpK=top('mvp'), mitK=top('mitada'), recK=top('recuperacao'), masK=top('massacre');
+    const mvpK=top('mvp'), mitK=top('mitada'), recK=top('recuperacao'), masK=top('massacre'), podioK=top('podio');
 
     let html = '<div style="margin-bottom:16px;text-align:center;font-family:Cinzel,serif;color:var(--amber);font-size:1em;letter-spacing:0.05em;">⭐ DESTAQUES DA TEMPORADA ⭐</div>';
 
@@ -948,6 +949,7 @@ function renderAchievements(data) {
     if (mitK?.mitada>0)        html+=`<div class="hall-card" style="background:linear-gradient(135deg,#1E0E0E,#2A1212);border:1px solid #8A3A3A;"><div class="hall-avatar">${mitK.avatar}</div><div class="hall-category" style="color:#ff6b6b;">💀 MESTRE DA DESTRUIÇÃO</div><div class="hall-name" style="color:var(--text-bright);">${mitK.name}</div><div class="hall-achievement">${mitK.mitada}x Mitada</div><div class="hall-title" style="color:#C07878;">${getTitle('mitada',mitK.mitada)}</div></div>`;
     if (recK?.recuperacao>0)   html+=`<div class="hall-card" style="background:linear-gradient(135deg,#0E1A20,#102420);border:1px solid #2A6A52;"><div class="hall-avatar">${recK.avatar}</div><div class="hall-category" style="color:#74b9ff;">📈 A FÊNIX IMORTAL</div><div class="hall-name" style="color:var(--text-bright);">${recK.name}</div><div class="hall-achievement">${recK.recuperacao}x Recuperação</div><div class="hall-title" style="color:#6AAA88;">${getTitle('recuperacao',recK.recuperacao)}</div></div>`;
     if (masK?.massacre>0)      html+=`<div class="hall-card" style="background:linear-gradient(135deg,#160E20,#1C1028);border:1px solid #5A3A7A;"><div class="hall-avatar">${masK.avatar}</div><div class="hall-category" style="color:#c39bd3;">🗡️ SENHOR DO MASSACRE</div><div class="hall-name" style="color:var(--text-bright);">${masK.name}</div><div class="hall-achievement">${masK.massacre}x Massacre</div><div class="hall-title" style="color:#A88EC0;">${getTitle('massacre',masK.massacre)}</div></div>`;
+    if (podioK?.podio>0)       html+=`<div class="hall-card" style="background:linear-gradient(135deg,#1A1A0E,#242410);border:1px solid #6A6A20;"><div class="hall-avatar">${podioK.avatar}</div><div class="hall-category" style="color:#f9e54a;">🥇 SENHOR DOS PÓDIOS</div><div class="hall-name" style="color:var(--text-bright);">${podioK.name}</div><div class="hall-achievement">${podioK.podio}x Pódio</div><div class="hall-title" style="color:#C8C06A;">${getTitle('podio',podioK.podio)}</div></div>`;
 
     html += '<hr class="divider"><div style="font-family:Cinzel,serif;color:var(--amber);font-size:0.95em;margin-bottom:14px;letter-spacing:0.05em;">📜 TODOS OS TÍTULOS</div>';
     html += data.map(lord=>`
@@ -1053,6 +1055,7 @@ async function init() {
         if (!rows.length) throw new Error('dados.csv vazio ou formato inválido.');
 
         const BATTLES = buildBattles(rows);
+        if (!BATTLES.length) throw new Error('Nenhuma rodada encontrada em dados.csv.');
         const lastRound = Math.max(...BATTLES.map(b=>b.week));
 
         document.getElementById('current-round').textContent = lastRound;
@@ -1061,7 +1064,7 @@ async function init() {
         const processedData = processAll(BATTLES);
 
         renderRanking(processedData, lastRound);
-        renderAliancas(processedData, lastRound);
+        renderAliancas(processedData);
         renderMedieval(processedData, lastRound);
         renderBattles(BATTLES, processedData);
         renderAchievements(processedData);
