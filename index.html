@@ -939,17 +939,43 @@ function renderBattles(BATTLES, data) {
 // ════════════════════════════════════════════════
 // RENDER HALL DA FAMA
 // ════════════════════════════════════════════════
-function renderAchievements(data) {
+function renderAchievements(data, lastRound) {
+    const locked = lastRound < MEDIEVAL_START;
+
+    if (locked) {
+        const html = `
+        <div class="notice-banner">⏳ Títulos e conquistas ativam na <strong>Rodada ${MEDIEVAL_START}</strong>.<br>Todas as conquistas começam do zero a partir dessa rodada.</div>
+        ${[...data].sort((a,b)=>a.name.localeCompare(b.name)).map(lord => `
+        <div class="lord-card" style="border-color:rgba(60,58,70,0.5)">
+            <div class="lord-header">
+                <div class="avatar" style="opacity:0.5">${lord.avatar}</div>
+                <div class="lord-info">
+                    <div class="lord-name" style="color:var(--text-muted)">${lord.name}</div>
+                    ${allianceTag(lord)}
+                    <div class="lord-title-text">📰 Escudeiro Sem Nome</div>
+                </div>
+            </div>
+            <div class="points-display" style="opacity:0.4">
+                <div class="total-points" style="color:#333">—</div>
+                <div style="font-size:0.88em;color:var(--text-muted);font-style:italic;">Aguardando Rodada ${MEDIEVAL_START}</div>
+            </div>
+        </div>`).join('')}`;
+        document.getElementById('achievements-list').innerHTML = html;
+        return;
+    }
+
     const top = (key) => [...data].sort((a,b)=>b[key]-a[key])[0];
-    const mvpK=top('mvp'), mitK=top('mitada'), recK=top('recuperacao'), masK=top('massacre'), podioK=top('podio');
+    const mvpK=top('mvpCalc'), mitK=top('mitadaCalc'), recK=top('recuperacaoCalc'),
+          masK=top('massacreCalc'), podioK=top('podioCalc');
 
-    let html = '<div style="margin-bottom:16px;text-align:center;font-family:Cinzel,serif;color:var(--amber);font-size:1em;letter-spacing:0.05em;">⭐ DESTAQUES DA TEMPORADA ⭐</div>';
+    let html = '<div class="notice-banner">⚔️ Títulos e conquistas ativos desde a <strong>Rodada ' + MEDIEVAL_START + '</strong>.</div>';
+    html += '<div style="margin-bottom:16px;text-align:center;font-family:Cinzel,serif;color:var(--amber);font-size:1em;letter-spacing:0.05em;">⭐ DESTAQUES DA TEMPORADA ⭐</div>';
 
-    if (mvpK?.mvp>0)           html+=`<div class="hall-card" style="background:linear-gradient(135deg,#221A04,#2E2208);border:1px solid var(--amber-dim);"><div class="hall-avatar">${mvpK.avatar}</div><div class="hall-category" style="color:var(--amber-light);">🏆 REI DAS VITÓRIAS</div><div class="hall-name" style="color:var(--amber-light);">${mvpK.name}</div><div class="hall-achievement">${mvpK.mvp}x MVP</div><div class="hall-title" style="color:#9A8A6A;">${getTitle('mvp',mvpK.mvp)}</div></div>`;
-    if (mitK?.mitada>0)        html+=`<div class="hall-card" style="background:linear-gradient(135deg,#1E0E0E,#2A1212);border:1px solid #8A3A3A;"><div class="hall-avatar">${mitK.avatar}</div><div class="hall-category" style="color:#ff6b6b;">💀 MESTRE DA DESTRUIÇÃO</div><div class="hall-name" style="color:var(--text-bright);">${mitK.name}</div><div class="hall-achievement">${mitK.mitada}x Mitada</div><div class="hall-title" style="color:#C07878;">${getTitle('mitada',mitK.mitada)}</div></div>`;
-    if (recK?.recuperacao>0)   html+=`<div class="hall-card" style="background:linear-gradient(135deg,#0E1A20,#102420);border:1px solid #2A6A52;"><div class="hall-avatar">${recK.avatar}</div><div class="hall-category" style="color:#74b9ff;">📈 A FÊNIX IMORTAL</div><div class="hall-name" style="color:var(--text-bright);">${recK.name}</div><div class="hall-achievement">${recK.recuperacao}x Recuperação</div><div class="hall-title" style="color:#6AAA88;">${getTitle('recuperacao',recK.recuperacao)}</div></div>`;
-    if (masK?.massacre>0)      html+=`<div class="hall-card" style="background:linear-gradient(135deg,#160E20,#1C1028);border:1px solid #5A3A7A;"><div class="hall-avatar">${masK.avatar}</div><div class="hall-category" style="color:#c39bd3;">🗡️ SENHOR DO MASSACRE</div><div class="hall-name" style="color:var(--text-bright);">${masK.name}</div><div class="hall-achievement">${masK.massacre}x Massacre</div><div class="hall-title" style="color:#A88EC0;">${getTitle('massacre',masK.massacre)}</div></div>`;
-    if (podioK?.podio>0)       html+=`<div class="hall-card" style="background:linear-gradient(135deg,#1A1A0E,#242410);border:1px solid #6A6A20;"><div class="hall-avatar">${podioK.avatar}</div><div class="hall-category" style="color:#f9e54a;">🥇 SENHOR DOS PÓDIOS</div><div class="hall-name" style="color:var(--text-bright);">${podioK.name}</div><div class="hall-achievement">${podioK.podio}x Pódio</div><div class="hall-title" style="color:#C8C06A;">${getTitle('podio',podioK.podio)}</div></div>`;
+    if (mvpK?.mvpCalc>0)          html+=`<div class="hall-card" style="background:linear-gradient(135deg,#221A04,#2E2208);border:1px solid var(--amber-dim);"><div class="hall-avatar">${mvpK.avatar}</div><div class="hall-category" style="color:var(--amber-light);">🏆 REI DAS VITÓRIAS</div><div class="hall-name" style="color:var(--amber-light);">${mvpK.name}</div><div class="hall-achievement">${mvpK.mvpCalc}x MVP</div><div class="hall-title" style="color:#9A8A6A;">${getTitle('mvp',mvpK.mvpCalc)}</div></div>`;
+    if (mitK?.mitadaCalc>0)       html+=`<div class="hall-card" style="background:linear-gradient(135deg,#1E0E0E,#2A1212);border:1px solid #8A3A3A;"><div class="hall-avatar">${mitK.avatar}</div><div class="hall-category" style="color:#ff6b6b;">💀 MESTRE DA DESTRUIÇÃO</div><div class="hall-name" style="color:var(--text-bright);">${mitK.name}</div><div class="hall-achievement">${mitK.mitadaCalc}x Mitada</div><div class="hall-title" style="color:#C07878;">${getTitle('mitada',mitK.mitadaCalc)}</div></div>`;
+    if (recK?.recuperacaoCalc>0)  html+=`<div class="hall-card" style="background:linear-gradient(135deg,#0E1A20,#102420);border:1px solid #2A6A52;"><div class="hall-avatar">${recK.avatar}</div><div class="hall-category" style="color:#74b9ff;">📈 A FÊNIX IMORTAL</div><div class="hall-name" style="color:var(--text-bright);">${recK.name}</div><div class="hall-achievement">${recK.recuperacaoCalc}x Recuperação</div><div class="hall-title" style="color:#6AAA88;">${getTitle('recuperacao',recK.recuperacaoCalc)}</div></div>`;
+    if (masK?.massacreCalc>0)     html+=`<div class="hall-card" style="background:linear-gradient(135deg,#160E20,#1C1028);border:1px solid #5A3A7A;"><div class="hall-avatar">${masK.avatar}</div><div class="hall-category" style="color:#c39bd3;">🗡️ SENHOR DO MASSACRE</div><div class="hall-name" style="color:var(--text-bright);">${masK.name}</div><div class="hall-achievement">${masK.massacreCalc}x Massacre</div><div class="hall-title" style="color:#A88EC0;">${getTitle('massacre',masK.massacreCalc)}</div></div>`;
+    if (podioK?.podioCalc>0)      html+=`<div class="hall-card" style="background:linear-gradient(135deg,#1A1A0E,#242410);border:1px solid #6A6A20;"><div class="hall-avatar">${podioK.avatar}</div><div class="hall-category" style="color:#f9e54a;">🥇 SENHOR DOS PÓDIOS</div><div class="hall-name" style="color:var(--text-bright);">${podioK.name}</div><div class="hall-achievement">${podioK.podioCalc}x Pódio</div><div class="hall-title" style="color:#C8C06A;">${getTitle('podio',podioK.podioCalc)}</div></div>`;
 
     html += '<hr class="divider"><div style="font-family:Cinzel,serif;color:var(--amber);font-size:0.95em;margin-bottom:14px;letter-spacing:0.05em;">📜 TODOS OS TÍTULOS</div>';
     html += data.map(lord=>`
@@ -963,12 +989,12 @@ function renderAchievements(data) {
                 </div>
             </div>
             <div class="stats-grid">
-                ${lord.mvp>0?`<div class="stat-item" style="background:rgba(200,134,10,0.08)"><div class="stat-label">🏆 MVP</div><div class="stat-value">${lord.mvp}x</div><div style="font-size:0.72em;color:var(--amber);margin-top:2px">${getTitle('mvp',lord.mvp)}</div></div>`:''}
-                ${lord.mitada>0?`<div class="stat-item" style="background:rgba(231,76,60,0.08)"><div class="stat-label">💀 Mitada</div><div class="stat-value">${lord.mitada}x</div><div style="font-size:0.72em;color:#e74c3c;margin-top:2px">${getTitle('mitada',lord.mitada)}</div></div>`:''}
-                ${lord.recuperacao>0?`<div class="stat-item" style="background:rgba(52,152,219,0.08)"><div class="stat-label">📈 Recup.</div><div class="stat-value">${lord.recuperacao}x</div><div style="font-size:0.72em;color:#3498db;margin-top:2px">${getTitle('recuperacao',lord.recuperacao)}</div></div>`:''}
-                ${lord.massacre>0?`<div class="stat-item" style="background:rgba(155,89,182,0.08)"><div class="stat-label">🗡️ Massacre</div><div class="stat-value">${lord.massacre}x</div><div style="font-size:0.72em;color:#9b59b6;margin-top:2px">${getTitle('massacre',lord.massacre)}</div></div>`:''}
-                ${lord.podio>0?`<div class="stat-item"><div class="stat-label">🥇 Pódio</div><div class="stat-value">${lord.podio}x</div></div>`:''}
-                ${lord.lanterna>0?`<div class="stat-item"><div class="stat-label">📦 Lanterna</div><div class="stat-value negative">${lord.lanterna}x</div></div>`:''}
+                ${lord.mvpCalc>0?`<div class="stat-item" style="background:rgba(200,134,10,0.08)"><div class="stat-label">🏆 MVP</div><div class="stat-value">${lord.mvpCalc}x</div><div style="font-size:0.72em;color:var(--amber);margin-top:2px">${getTitle('mvp',lord.mvpCalc)}</div></div>`:''}
+                ${lord.mitadaCalc>0?`<div class="stat-item" style="background:rgba(231,76,60,0.08)"><div class="stat-label">💀 Mitada</div><div class="stat-value">${lord.mitadaCalc}x</div><div style="font-size:0.72em;color:#e74c3c;margin-top:2px">${getTitle('mitada',lord.mitadaCalc)}</div></div>`:''}
+                ${lord.recuperacaoCalc>0?`<div class="stat-item" style="background:rgba(52,152,219,0.08)"><div class="stat-label">📈 Recup.</div><div class="stat-value">${lord.recuperacaoCalc}x</div><div style="font-size:0.72em;color:#3498db;margin-top:2px">${getTitle('recuperacao',lord.recuperacaoCalc)}</div></div>`:''}
+                ${lord.massacreCalc>0?`<div class="stat-item" style="background:rgba(155,89,182,0.08)"><div class="stat-label">🗡️ Massacre</div><div class="stat-value">${lord.massacreCalc}x</div><div style="font-size:0.72em;color:#9b59b6;margin-top:2px">${getTitle('massacre',lord.massacreCalc)}</div></div>`:''}
+                ${lord.podioCalc>0?`<div class="stat-item"><div class="stat-label">🥇 Pódio</div><div class="stat-value">${lord.podioCalc}x</div></div>`:''}
+                ${lord.lanternaCalc>0?`<div class="stat-item"><div class="stat-label">📦 Lanterna</div><div class="stat-value negative">${lord.lanternaCalc}x</div></div>`:''}
             </div>
         </div>`).join('');
 
@@ -981,7 +1007,7 @@ function renderAchievements(data) {
 function renderRules() {
     document.getElementById('rules-content').innerHTML = `
     <div class="rules-section">
-        <div class="rule-note warning">⚠️ <strong>Regra especial desta versão:</strong> Pontos medievais só são contabilizados a partir da Rodada ${MEDIEVAL_START}. As rodadas 1–${MEDIEVAL_START-1} contam normalmente no Cartola mas não geram pontos medievais. As conquistas das R1–R${MEDIEVAL_START-1} contam para os títulos progressivos.</div>
+        <div class="rule-note warning">⚠️ <strong>Regra especial desta versão:</strong> Pontos medievais, conquistas e títulos só são contabilizados a partir da Rodada ${MEDIEVAL_START}. As rodadas 1–${MEDIEVAL_START-1} contam normalmente no Cartola, mas <strong>não geram pontos medievais nem títulos</strong>.</div>
     </div>
     <div class="rules-section">
         <div class="rules-group-title">🤝 ALIANÇAS</div>
@@ -1067,7 +1093,7 @@ async function init() {
         renderAliancas(processedData);
         renderMedieval(processedData, lastRound);
         renderBattles(BATTLES, processedData);
-        renderAchievements(processedData);
+        renderAchievements(processedData, lastRound);
         renderRules();
 
         document.getElementById('loading').style.display = 'none';
