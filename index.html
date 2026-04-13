@@ -993,8 +993,8 @@ function renderAchievements(data, lastRound) {
                 ${lord.mitadaCalc>0?`<div class="stat-item" style="background:rgba(231,76,60,0.08)"><div class="stat-label">💀 Mitada</div><div class="stat-value">${lord.mitadaCalc}x</div><div style="font-size:0.72em;color:#e74c3c;margin-top:2px">${getTitle('mitada',lord.mitadaCalc)}</div></div>`:''}
                 ${lord.recuperacaoCalc>0?`<div class="stat-item" style="background:rgba(52,152,219,0.08)"><div class="stat-label">📈 Recup.</div><div class="stat-value">${lord.recuperacaoCalc}x</div><div style="font-size:0.72em;color:#3498db;margin-top:2px">${getTitle('recuperacao',lord.recuperacaoCalc)}</div></div>`:''}
                 ${lord.massacreCalc>0?`<div class="stat-item" style="background:rgba(155,89,182,0.08)"><div class="stat-label">🗡️ Massacre</div><div class="stat-value">${lord.massacreCalc}x</div><div style="font-size:0.72em;color:#9b59b6;margin-top:2px">${getTitle('massacre',lord.massacreCalc)}</div></div>`:''}
-                ${lord.podioCalc>0?`<div class="stat-item"><div class="stat-label">🥇 Pódio</div><div class="stat-value">${lord.podioCalc}x</div></div>`:''}
-                ${lord.lanternaCalc>0?`<div class="stat-item"><div class="stat-label">📦 Lanterna</div><div class="stat-value negative">${lord.lanternaCalc}x</div></div>`:''}
+                ${lord.podioCalc>0?`<div class="stat-item" style="background:rgba(52,211,153,0.06)"><div class="stat-label">🥇 Pódio</div><div class="stat-value">${lord.podioCalc}x</div><div style="font-size:0.72em;color:#34d399;margin-top:2px">${getTitle('podio',lord.podioCalc)}</div></div>`:''}
+                ${lord.lanternaCalc>0?`<div class="stat-item" style="background:rgba(139,42,42,0.08)"><div class="stat-label">📦 Lanterna</div><div class="stat-value negative">${lord.lanternaCalc}x</div><div style="font-size:0.72em;color:#e74c3c;margin-top:2px">${getTitle('lanterna',lord.lanternaCalc)}</div></div>`:''}
             </div>
         </div>`).join('');
 
