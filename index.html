@@ -100,6 +100,21 @@
             font-family:'Crimson Text',serif; font-size:0.85em; color:var(--text-muted);
             text-align:center; margin-top:5px; font-style:italic;
         }
+        #current-round {
+            font-family:'Cinzel',serif; font-style:normal; font-weight:900;
+            font-size:1.1em; color:#FFD700;
+            background:rgba(200,134,10,0.18);
+            border:1px solid rgba(232,160,32,0.55);
+            border-radius:5px; padding:1px 8px;
+            display:inline-block;
+            text-shadow:0 0 10px rgba(255,215,0,0.6);
+            box-shadow:0 0 10px rgba(200,134,10,0.25);
+            animation:roundPulse 2.5s ease-in-out infinite;
+        }
+        @keyframes roundPulse {
+            0%,100% { box-shadow:0 0 6px rgba(200,134,10,0.2); text-shadow:0 0 8px rgba(255,215,0,0.4); }
+            50%      { box-shadow:0 0 18px rgba(200,134,10,0.6); text-shadow:0 0 16px rgba(255,215,0,0.9); }
+        }
 
         /* CONTENT */
         .content { padding:18px 16px; max-width:640px; margin:0 auto; }
@@ -374,7 +389,7 @@
         <span class="header-badge badge-anel">💍 Sociedade do Anel</span>
         <span class="header-badge badge-northclaw">🦅 North Claw</span>
     </div>
-    <div class="header-sub">Temporada 2026 · Rodada <span id="current-round">—</span> de 38 · Pontos medievais a partir da R6</div>
+    <div class="header-sub">⚔️ Rodada <span id="current-round">—</span> <span style="font-size:0.8em;opacity:0.7">/ 38</span> &nbsp;·&nbsp; Temporada 2026</div>
 </div>
 
 <div class="content">
