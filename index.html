@@ -992,7 +992,49 @@ function renderAchievements(data, lastRound) {
     if (masK?.massacreCalc>0)     html+=`<div class="hall-card" style="background:linear-gradient(135deg,#160E20,#1C1028);border:1px solid #5A3A7A;"><div class="hall-avatar">${masK.avatar}</div><div class="hall-category" style="color:#c39bd3;">🗡️ SENHOR DO MASSACRE</div><div class="hall-name" style="color:var(--text-bright);">${masK.name}</div><div class="hall-achievement">${masK.massacreCalc}x Massacre</div><div class="hall-title" style="color:#A88EC0;">${getTitle('massacre',masK.massacreCalc)}</div></div>`;
     if (podioK?.podioCalc>0)      html+=`<div class="hall-card" style="background:linear-gradient(135deg,#1A1A0E,#242410);border:1px solid #6A6A20;"><div class="hall-avatar">${podioK.avatar}</div><div class="hall-category" style="color:#f9e54a;">🥇 SENHOR DOS PÓDIOS</div><div class="hall-name" style="color:var(--text-bright);">${podioK.name}</div><div class="hall-achievement">${podioK.podioCalc}x Pódio</div><div class="hall-title" style="color:#C8C06A;">${getTitle('podio',podioK.podioCalc)}</div></div>`;
 
-    html += '<hr class="divider"><div style="font-family:Cinzel,serif;color:var(--amber);font-size:0.95em;margin-bottom:14px;letter-spacing:0.05em;">📜 TODOS OS TÍTULOS</div>';
+    // ── TÍTULOS CONQUISTADOS POR TIME (tabela resumo)
+    html += '<hr class="divider"><div style="font-family:Cinzel,serif;color:var(--amber);font-size:0.95em;margin-bottom:14px;letter-spacing:0.05em;">🏰 TÍTULOS CONQUISTADOS POR TIME</div>';
+
+    const achCats = [
+        { key:'mvpCalc',         label:'🏆 MVP',      color:'var(--amber)',  titleFn: c=>getTitle('mvp',c) },
+        { key:'mitadaCalc',      label:'💀 Mitada',   color:'#e74c3c',       titleFn: c=>getTitle('mitada',c) },
+        { key:'podioCalc',       label:'🥇 Pódio',    color:'#34d399',       titleFn: c=>getTitle('podio',c) },
+        { key:'recuperacaoCalc', label:'📈 Recup.',   color:'#3498db',       titleFn: c=>getTitle('recuperacao',c) },
+        { key:'massacreCalc',    label:'🗡️ Massacre', color:'#9b59b6',       titleFn: c=>getTitle('massacre',c) },
+        { key:'lanternaCalc',    label:'📦 Lanterna', color:'#e74c3c',       titleFn: c=>getTitle('lanterna',c) },
+    ];
+
+    html += [...data].sort((a,b)=>b.totalPoints-a.totalPoints).map((lord, pos) => {
+        const allTitles = achCats
+            .filter(c => lord[c.key] > 0)
+            .map(c => `
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:9px 12px;border-radius:4px;margin-bottom:6px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);">
+                    <div style="display:flex;align-items:center;gap:10px;flex:1;min-width:0;">
+                        <span style="font-size:0.9em;color:${c.color};font-weight:700;white-space:nowrap;">${c.label}</span>
+                        <span style="font-family:Cinzel,serif;font-size:1.05em;font-weight:900;color:var(--amber-light);flex-shrink:0;">${lord[c.key]}x</span>
+                        <span style="font-size:0.78em;color:${c.color};font-style:italic;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${c.titleFn(lord[c.key])}</span>
+                    </div>
+                </div>`).join('');
+
+        const hasAny = achCats.some(c => lord[c.key] > 0);
+        const posLabel = pos===0?'👑':pos===1?'🥈':pos===2?'🥉':`${pos+1}º`;
+
+        return `
+        <div class="lord-card" style="border-color:${lord.color};margin-bottom:18px;">
+            <div class="lord-header" style="margin-bottom:10px;">
+                <div class="position-badge ${pos===0?'pos-1':pos===1?'pos-2':pos===2?'pos-3':'pos-n'}" style="width:44px;height:44px;font-size:1.1em;">${posLabel}</div>
+                <div class="avatar">${lord.avatar}</div>
+                <div class="lord-info">
+                    <div class="lord-name">${lord.name}</div>
+                    ${allianceTag(lord)}
+                    <div class="lord-title-text">${lord.currentTitle}</div>
+                </div>
+            </div>
+            ${hasAny ? allTitles : `<div style="text-align:center;color:var(--text-muted);font-style:italic;font-size:0.9em;padding:10px;">Nenhum título conquistado ainda</div>`}
+        </div>`;
+    }).join('');
+
+    html += '<hr class="divider"><div style="font-family:Cinzel,serif;color:var(--amber);font-size:0.95em;margin-bottom:14px;letter-spacing:0.05em;">📜 DETALHES POR TIME</div>';
     html += data.map(lord=>`
         <div class="lord-card" style="border-color:${lord.color}">
             <div class="lord-header">
